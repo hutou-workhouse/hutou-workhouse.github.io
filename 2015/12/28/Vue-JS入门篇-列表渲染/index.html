@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="林晓明" />
+
+
+
+<meta name="description" content="如何渲染列表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.JS入门篇--列表渲染">
+<meta property="og:url" content="http://www.linxiaoming.me/2015/12/28/Vue-JS入门篇-列表渲染/index.html">
+<meta property="og:site_name" content="虎头的博客">
+<meta property="og:description" content="如何渲染列表">
+<meta property="og:updated_time" content="2016-05-26T23:35:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue.JS入门篇--列表渲染">
+<meta name="twitter:description" content="如何渲染列表">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="虎头的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Vue.JS入门篇--列表渲染 | 虎头的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">林晓明</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/note/">流水账</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glup/">Glup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控制码/">控制码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构建工具/">构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码/">编码</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">林晓明</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">林晓明</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/note/">流水账</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Vue-JS入门篇-列表渲染" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/28/Vue-JS入门篇-列表渲染/" class="article-date">
+      <time datetime="2015-12-28T10:26:55.000Z" itemprop="datePublished">2015-12-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue.JS入门篇--列表渲染
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a><a class="article-category-link" href="/categories/javascript/Vue/">Vue</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术文章/">技术文章</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>如何渲染列表</p>
+<a id="more"></a>
+<blockquote>
+<p>你可以使用 v-repeat 指令来基于 ViewModel 上的对象数组渲染列表。对于数组中的每个对象，该指令将创建一个以该对象作为其 $data 对象的子 Vue 实例。这些子实例继承父实例的数据作用域，因此在重复的模板元素中你既可以访问子实例的属性，也可以访问父实例的属性。此外,你还可以通过 $index 属性来获取当前实例对应的数组索引。</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"items"</span> <span class="attr">class</span>=<span class="string">"item-</span></span><span class="template-variable">&#123;&#123;$index&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></div><div class="line">    <span class="template-variable">&#123;&#123;$index&#125;&#125;</span><span class="xml"> - </span><span class="template-variable">&#123;&#123;parentMsg&#125;&#125;</span><span class="xml"> </span><span class="template-variable">&#123;&#123;childMsg&#125;&#125;</span><span class="xml"></span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var demo = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="keyword">e</span><span class="variable">l:</span> <span class="string">'#demo'</span>,</div><div class="line">  dat<span class="variable">a:</span> &#123;</div><div class="line">    parentMs<span class="variable">g:</span> <span class="string">'Hello'</span>,</div><div class="line">    item<span class="variable">s:</span> [</div><div class="line">      &#123; childMs<span class="variable">g:</span> <span class="string">'Foo'</span> &#125;,</div><div class="line">      &#123; childMs<span class="variable">g:</span> <span class="string">'Bar'</span> &#125;</div><div class="line">    ]</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>查看一下效果，应该很容易得到结果</p>
+<h1 id="块级重复"><a href="#块级重复" class="headerlink" title="块级重复"></a>块级重复</h1><p>有时我们可能需要重复一个包含多个节点的块，这时可以用 <template> 标签包裹这个块。这里的 <template> 标签只起到语义上的包裹作用，其本身不会被渲染出来。例如：<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-repeat</span>=<span class="string">"list"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="template-variable">&#123;&#123;msg&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></template></template></p>
+<h1 id="简单值数组"><a href="#简单值数组" class="headerlink" title="简单值数组"></a>简单值数组</h1><p>简单值 (primitive value) 即字符串、数字、boolean 等并非对象的值。对于包含简单值的数组，你可用 $value 直接访问值:<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"tags"</span>&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"tags"</span>&gt;</span></div><div class="line">    <span class="template-variable">&#123;&#123;$value&#125;&#125;</span><span class="xml"></span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">new</span> <span class="selector-tag">Vue</span>(&#123;</div><div class="line">  <span class="attribute">el</span>: <span class="string">'#tags'</span>,</div><div class="line">  <span class="attribute">data</span>: &#123;</div><div class="line">    <span class="attribute">tags</span>: [<span class="string">'JavaScript'</span>, <span class="string">'MVVM'</span>, <span class="string">'Vue.js'</span>]</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h1 id="使用别名"><a href="#使用别名" class="headerlink" title="使用别名"></a>使用别名</h1><p>有时我们可能想要更明确地访问当前作用域的变量而不是隐式地回退到父作用域。你可以通过提供一个参数给 v-repeat 指令并用它作为将被迭代项的别名:<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"users"</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"user : users"</span>&gt;</span></div><div class="line">        <span class="template-variable">&#123;&#123;user.name&#125;&#125;</span><span class="xml"> - </span><span class="template-variable">&#123;&#123;user.email&#125;&#125;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var users = <span class="keyword">new</span> Vue(&#123;</div><div class="line"><span class="symbol">    el:</span> <span class="string">'#users'</span>,</div><div class="line"><span class="symbol">    data:</span> &#123;</div><div class="line"><span class="symbol">        users:</span> [</div><div class="line">            &#123; <span class="string">name:</span> <span class="string">'Foo Bar'</span>, <span class="string">email:</span> <span class="string">'foo@bar.com'</span> &#125;,</div><div class="line">            &#123; <span class="string">name:</span> <span class="string">'John Doh'</span>, <span class="string">email:</span> <span class="string">'john@doh.com'</span> &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="变异方法"><a href="#变异方法" class="headerlink" title="变异方法"></a>变异方法</h1><p>Vue.js 内部对被观察数组的变异方法 (mutating methods，包括 push(), pop(), shift(), unshift(), splice(), sort() 和 reverse()) 进行了拦截，因此调用这些方法也将自动触发视图更新。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 以下操作会触发 DOM 更新</span></div><div class="line">demo<span class="selector-class">.items</span><span class="selector-class">.unshift</span>(&#123; childMsg: <span class="string">'Baz'</span> &#125;)</div><div class="line">demo<span class="selector-class">.items</span><span class="selector-class">.pop</span>()</div></pre></td></tr></table></figure></p>
+<p>下面是一个演示的例子，点击按钮的时候数据项会被移除<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.16/vue.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"tags"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"tags"</span>&gt;</span></div><div class="line">            <span class="template-variable">&#123;&#123;$value&#125;&#125;</span><span class="xml"></span></div><div class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"测试"</span> <span class="attr">onclick</span>=<span class="string">"myClick();"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span></div><div class="line">    <span class="keyword">var</span> tag = <span class="keyword">new</span> Vue(&#123;</div><div class="line">        el: <span class="string">'#tags'</span>,</div><div class="line">        data: &#123;</div><div class="line">            tags: [<span class="string">'标签一'</span>, <span class="string">'标签二'</span>, <span class="string">'标签三'</span>]</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">myClick</span><span class="params">()</span></span>&#123;</div><div class="line">        tag.tags.pop();</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h1 id="扩展方法"><a href="#扩展方法" class="headerlink" title="扩展方法"></a>扩展方法</h1><p>Vue.js 给被观察数组添加了两个便捷方法：$set() 和 $remove() 。<br>你应该避免直接通过索引来设置数据绑定数组中的元素，比如 demo.items[0] = {}，因为这些改动是无法被 Vue.js 侦测到的。你应该使用扩展的 $set() 方法:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 不要用 `demo.items[0] = ...`</span></div><div class="line">demo<span class="selector-class">.items</span>.<span class="variable">$set</span>(<span class="number">0</span>, &#123; childMsg: <span class="string">'Changed!'</span>&#125;)</div></pre></td></tr></table></figure></p>
+<p>$remove() 只是 splice()方法的语法糖。它将移除给定索引处的元素。当参数不是数值时，$remove() 将在数组中搜索该值并删除第一个发现的对应元素。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 删除索引为 0 的元素。</span></div><div class="line">demo<span class="selector-class">.items</span>.<span class="variable">$remove</span>(<span class="number">0</span>)</div></pre></td></tr></table></figure></p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.16/vue.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"tags"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"tags"</span>&gt;</span></div><div class="line">            <span class="template-variable">&#123;&#123;$value&#125;&#125;</span><span class="xml"></span></div><div class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"测试"</span> <span class="attr">onclick</span>=<span class="string">"myClick();"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span></div><div class="line">    <span class="keyword">var</span> tag = <span class="keyword">new</span> Vue(&#123;</div><div class="line">        el: <span class="string">'#tags'</span>,</div><div class="line">        data: &#123;</div><div class="line">            tags: [<span class="string">'标签一'</span>, <span class="string">'标签二'</span>, <span class="string">'标签三'</span>]</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">myClick</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="comment">//tag.tags.pop();</span></div><div class="line">        <span class="comment">//tag.tags[0] = '修改后的内容不生效';</span></div><div class="line">        tag.tags.$<span class="keyword">set</span>(<span class="number">0</span>, <span class="string">'修改后的内容生效'</span>);</div><div class="line">        tag.tags.$remove(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="替换数组"><a href="#替换数组" class="headerlink" title="替换数组"></a>替换数组</h1><p>当你使用非变异方法，比如filter(), concat() 或 slice()，返回的数组将是一个不同的实例。在此情况下，你可以用新数组替换旧的数组:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">demo<span class="selector-class">.items</span> = demo<span class="selector-class">.items</span><span class="selector-class">.filter</span>(function (item) &#123;</div><div class="line">  return item<span class="selector-class">.childMsg</span><span class="selector-class">.match</span>(/Hello/)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>你可能会认为这将导致整个列表的 DOM 被销毁并重新渲染。但别担心，Vue.js 能够识别一个数组元素是否已有关联的 Vue 实例， 并尽可能地进行有效复用。</p>
+<h1 id="使用track-by"><a href="#使用track-by" class="headerlink" title="使用track-by"></a>使用track-by</h1><p>在某些情况下，你可能需要以全新的对象（比如 API 调用所返回的对象）去替换数组。如果你的每一个数据对象都有一个唯一的 id 属性，那么你可以使用 track-by 特性参数给 Vue.js 一个提示，这样它就可以复用已有的具有相同 id 的 Vue 实例和 DOM 节点。<br>例如：你的数据是这个样子的<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attribute">items</span>: [</div><div class="line">    &#123; _uid: <span class="string">'88f869d'</span>, ... &#125;,</div><div class="line">    &#123; <span class="attribute">_uid</span>: <span class="string">'7496c10'</span>, ... &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那么你可以像这样给出提示:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-repeat</span>=<span class="string">"items"</span> <span class="attr">track-by</span>=<span class="string">"_uid"</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- content --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在替换 items 数组时，Vue.js 如果碰到一个有 _uid: ‘88f869d’ 的新对象，它就会知道可以直接复用有同样 _uid 的已有实例。<strong>在使用全新数据重新渲染大型 v-repeat 列表时，合理使用 track-by 能极大地提升性能。</strong></p>
+<h1 id="遍历对象"><a href="#遍历对象" class="headerlink" title="遍历对象"></a>遍历对象</h1><p>你也可以使用 v-repeat 遍历一个对象的所有属性。每个重复的实例会有一个特殊的属性 $key。对于简单值，你也可以象访问数组中的简单值那样使用 $value 属性。<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"repeat-object"</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"primitiveValues"</span>&gt;</span><span class="template-variable">&#123;&#123;$key&#125;&#125;</span><span class="xml"> : </span><span class="template-variable">&#123;&#123;$value&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>===<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"objectValues"</span>&gt;</span><span class="template-variable">&#123;&#123;$key&#125;&#125;</span><span class="xml"> : </span><span class="template-variable">&#123;&#123;msg&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">new</span> <span class="selector-tag">Vue</span>(&#123;</div><div class="line">    <span class="attribute">el</span>: <span class="string">'#repeat-object'</span>,</div><div class="line">    <span class="attribute">data</span>: &#123;</div><div class="line">        <span class="attribute">primitiveValues</span>: &#123;</div><div class="line">            <span class="attribute">FirstName</span>: <span class="string">'John'</span>,</div><div class="line">            <span class="attribute">LastName</span>: <span class="string">'Doe'</span>,</div><div class="line">            <span class="attribute">Age</span>: <span class="number">30</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attribute">objectValues</span>: &#123;</div><div class="line">            <span class="attribute">one</span>: &#123;</div><div class="line">                <span class="attribute">msg</span>: <span class="string">'Hello'</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attribute">two</span>: &#123;</div><div class="line">                <span class="attribute">msg</span>: <span class="string">'Bye'</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在 ECMAScript 5 中，对于给对象添加一个新属性，或是从对象中删除一个属性时，没有机制可以检测到这两种情况。针对这个问题，Vue.js 中的被观察对象会被添加三个扩展方法: $add(key, value), $set(key, value) 和 $delete(key)。这些方法可以被用于在添加 / 删除观察对象的属性时触发对应的视图更新。方法 $add 和 $set 的不同之处在于当指定的键已经在对象中存在时 $add 将提前返回，所以调用 obj.$add(key) 并不会以 undefined 覆盖已有的值。</p>
+<h1 id="迭代值域"><a href="#迭代值域" class="headerlink" title="迭代值域"></a>迭代值域</h1><p>v-repeat 也可以接受一个整数。在这种情况下，它将重复显示一个模板多次。<strong>下面的例子将迭代3次。</strong><br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"range"</span>&gt;</div><div class="line">    &lt;<span class="keyword">div</span> v-<span class="keyword">repeat</span>=<span class="string">"val"</span>&gt;Hi! &#123;&#123;$index&#125;&#125;&lt;/<span class="keyword">div</span>&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">new</span> <span class="selector-tag">Vue</span>(&#123;</div><div class="line">    <span class="attribute">el</span>: <span class="string">'#range'</span>,</div><div class="line">    <span class="attribute">data</span>: &#123;</div><div class="line">        <span class="attribute">val</span>: <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="数组过滤器"><a href="#数组过滤器" class="headerlink" title="数组过滤器"></a>数组过滤器</h1><p>有时候我们只需要显示一个数组的过滤或排序过的版本，而不需要实际改变或重置原始数据。Vue 提供了两个内置的过滤器来简化此类需求： filterBy 和 orderBy。<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"searchText"</span>&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-repeat</span>=<span class="string">"users | filterBy searchText"</span>&gt;</span><span class="template-variable">&#123;&#123;name&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/28/Vue-JS入门篇-列表渲染/">Vue.JS入门篇--列表渲染</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">林晓明</a></p>
+        <p><span>发布时间:</span>2015-12-28, 18:26:55</p>
+        <p><span>最后更新:</span>2016-05-27, 07:35:00</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/28/Vue-JS入门篇-列表渲染/" title="Vue.JS入门篇--列表渲染">http://www.linxiaoming.me/2015/12/28/Vue-JS入门篇-列表渲染/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.linxiaoming.me/2015/12/28/Vue-JS入门篇-列表渲染/　　作者: 林晓明" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/12/28/Vue-JS入门篇-事件监听/">
+                    Vue.JS入门篇--事件监听
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/12/28/Vue-JS入门篇-过滤器/">
+                    Vue.JS入门篇--过滤器
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#块级重复"><span class="toc-number">1.</span> <span class="toc-text">块级重复</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简单值数组"><span class="toc-number">2.</span> <span class="toc-text">简单值数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用别名"><span class="toc-number">3.</span> <span class="toc-text">使用别名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变异方法"><span class="toc-number">4.</span> <span class="toc-text">变异方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展方法"><span class="toc-number">5.</span> <span class="toc-text">扩展方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#替换数组"><span class="toc-number">6.</span> <span class="toc-text">替换数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用track-by"><span class="toc-number">7.</span> <span class="toc-text">使用track-by</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遍历对象"><span class="toc-number">8.</span> <span class="toc-text">遍历对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#迭代值域"><span class="toc-number">9.</span> <span class="toc-text">迭代值域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组过滤器"><span class="toc-number">10.</span> <span class="toc-text">数组过滤器</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Vue.JS入门篇--列表渲染　| 虎头的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/28/Vue-JS入门篇-事件监听/" title="上一篇: Vue.JS入门篇--事件监听">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/12/28/Vue-JS入门篇-过滤器/" title="下一篇: Vue.JS入门篇--过滤器">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/JS编码和Java编码区别/">JS编码和Java编码区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/26/Maven中的疑难杂症/">Maven中的疑难杂症</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/04-Istanbul代码覆盖率/">04-Istanbul代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/03-如何使用Karma/">03-如何使用Karma</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/02-如何使用mocha/">02-如何使用mocha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/01-Eslint静态代码检查/">01-Eslint静态代码检查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/00-Javascript测试综述/">00-Javascript测试综述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/npm-简明使用教程/">npm 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/控制码整理/">控制码整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/Glup-简明使用教程/">Glup 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-自定义指令/">Vue.JS入门篇--自定义指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-计算属性/">Vue.JS入门篇--计算属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-处理表单/">Vue.JS入门篇--处理表单</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-事件监听/">Vue.JS入门篇--事件监听</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-列表渲染/">Vue.JS入门篇--列表渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-过滤器/">Vue.JS入门篇--过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-指令/">Vue.JS入门篇--指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-初体验/">Vue.JS入门篇--初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/WebPack简明学习教程/">WebPack 简明学习教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/开始/">开始</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 林晓明
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

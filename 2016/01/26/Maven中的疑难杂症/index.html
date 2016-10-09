@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="林晓明" />
+
+
+
+<meta name="description" content="Maven的疑难杂症">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven中的疑难杂症">
+<meta property="og:url" content="http://www.linxiaoming.me/2016/01/26/Maven中的疑难杂症/index.html">
+<meta property="og:site_name" content="虎头的博客">
+<meta property="og:description" content="Maven的疑难杂症">
+<meta property="og:updated_time" content="2016-05-26T23:35:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven中的疑难杂症">
+<meta name="twitter:description" content="Maven的疑难杂症">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="虎头的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Maven中的疑难杂症 | 虎头的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">林晓明</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/note/">流水账</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glup/">Glup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控制码/">控制码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构建工具/">构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码/">编码</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">林晓明</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">林晓明</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/note/">流水账</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Maven中的疑难杂症" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/26/Maven中的疑难杂症/" class="article-date">
+      <time datetime="2016-01-26T10:53:56.000Z" itemprop="datePublished">2016-01-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Maven中的疑难杂症
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java/">java</a><a class="article-category-link" href="/categories/java/Maven/">Maven</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/构建工具/">构建工具</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Maven的疑难杂症</p>
+<a id="more"></a>
+<p>近期在进行工程整合的时候，又有些Maven使用中发现的问题进行整理</p>
+<ol>
+<li>发布和编译<br>在使用Maven build package 的时候，必须先clean一下。否则本次编译中删除的java代码如果在上次打包中存在，则class依然会出现在打好的包中。</li>
+<li>配置文件<br>我习惯自己书写一个setting.xml，这个文件中指定了私服的地址。在eclipse中进行配置。在eclipse中都没有问题，但是在命令行程序中执行会发现有些私服管理的包就找不到了。将这个文件复制到 <strong>%MAVEN_HOME%\conf</strong>下则可以解决这个问题。Maven在执行中首先检查这个目录，然后检查个人目录<strong>C:\Users\Administrator\.m2</strong>，为了安全，这个目录下我也放置了一份</li>
+<li>检查包依赖<br>在进行包管理中，会有一些意外的包被引入，导致出现问题。使用如下的命令可以查看包的依赖关系<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">mvn </span>dependency:tree -Dverbose</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>使用下面的命令可以进行内容的过滤<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这里是过滤包组织为org.hibernate的依赖关系</span></div><div class="line"><span class="attribute">mvn</span> dependency:tree -Dverbose -Dincludes=org.hibernate</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>去除包的依赖<br>从上面的命令中，我们已经可以判断出产生冲突的包是由什么地方被引入的。如果想剔除这个依赖，需要在引入的地方进行如下处理（<strong>拷贝自网络，去除asm包的引用</strong>）</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.unitils<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>unitils-dbmaintainer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$<span class="template-variable">&#123;unitils.version&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">version</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dbunit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.dbunit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 这个就是我们要加的片断 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>asm<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>asm<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>运行期查看Jar情况<br>有些问题在运行期出现，多是由于不同版本的包的兼容问题。这个时候可以使用如下的方法（<strong>取自网络<a href="http://stamen.iteye.com/blog/2030552" target="_blank" rel="external"></a></strong>）</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.ridge.util;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.net.MalformedURLException;</div><div class="line"><span class="keyword">import</span> java.net.URL;</div><div class="line"><span class="keyword">import</span> java.security.CodeSource;</div><div class="line"><span class="keyword">import</span> java.security.ProtectionDomain;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> : chenxh</div><div class="line"> * <span class="doctag">@date</span>: 13-10-31</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLocationUtils</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取类所有的路径</div><div class="line">     * <span class="doctag">@param</span> cls</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function">String <span class="title">where</span><span class="params">(<span class="keyword">final</span> Class cls)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (cls == <span class="keyword">null</span>)<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"null input: cls"</span>);</div><div class="line">        URL result = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">final</span> String clsAsResource = cls.getName().replace(<span class="string">'.'</span>, <span class="string">'/'</span>).concat(<span class="string">".class"</span>);</div><div class="line">        <span class="keyword">final</span> ProtectionDomain pd = cls.getProtectionDomain();</div><div class="line">        <span class="keyword">if</span> (pd != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">final</span> CodeSource cs = pd.getCodeSource();</div><div class="line">            <span class="keyword">if</span> (cs != <span class="keyword">null</span>) result = cs.getLocation();</div><div class="line">            <span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (<span class="string">"file"</span>.equals(result.getProtocol())) &#123;</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        <span class="keyword">if</span> (result.toExternalForm().endsWith(<span class="string">".jar"</span>) ||</div><div class="line">                                result.toExternalForm().endsWith(<span class="string">".zip"</span>))</div><div class="line">                            result = <span class="keyword">new</span> URL(<span class="string">"jar:"</span>.concat(result.toExternalForm())</div><div class="line">                                    .concat(<span class="string">"!/"</span>).concat(clsAsResource));</div><div class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">new</span> File(result.getFile()).isDirectory())</div><div class="line">                            result = <span class="keyword">new</span> URL(result, clsAsResource);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">catch</span> (MalformedURLException ignore) &#123;&#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">final</span> ClassLoader clsLoader = cls.getClassLoader();</div><div class="line">            result = clsLoader != <span class="keyword">null</span> ?</div><div class="line">                    clsLoader.getResource(clsAsResource) :</div><div class="line">                    ClassLoader.getSystemResource(clsAsResource);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">return</span> result.<span class="title">toString</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在出现问题的地方设置好断点，在断点处动态执行下面的代码<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 你运行出问题的类设置为参数</div><div class="line"><span class="selector-tag">ClassLocationUtils</span><span class="selector-class">.where</span>(<span class="selector-tag">org</span><span class="selector-class">.objectweb</span><span class="selector-class">.asm</span><span class="selector-class">.ClassVisitor</span><span class="selector-class">.class</span>)</div></pre></td></tr></table></figure></p>
+<p>可以马上查到这个类是哪个Jar包中的，可以判断是否符合自己的预期</p>
+<ol>
+<li>配置文件<br>下面是一个比较详细的说明，来自网络<a href="http://www.micmiu.com/software/build/maven-setting-xml/" target="_blank" rel="external">Maven配置setting.xml详细说明</a><figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span></div><div class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0"</span></span></div><div class="line">          <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">          <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span>&gt;</div><div class="line">  <span class="comment">&lt;!--指定本地仓库存储路径。默认值为~/.m2/repository 即 $</span><span class="template-variable">&#123;user.home&#125;</span><span class="xml"><span class="comment">/.m2/repository。 --&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>d:/.m2/repository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="comment">&lt;!--指定Maven是否需要和用户输入进行交互。true:需要与用户交互;false:使用一个合理的默认值。默认值为true。 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">interactiveMode</span>&gt;</span>true<span class="tag">&lt;/<span class="name">interactiveMode</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!--指定是否使用plugin-registry.xml文件来管理插件版本。设为true表示使用。默认值为false。--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">usePluginRegistry</span>&gt;</span>false<span class="tag">&lt;/<span class="name">usePluginRegistry</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!--指定是否在离线模式下运行。设为true表示项目构建要在离线模式下运行，默认值为false。 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">offline</span>&gt;</span>false<span class="tag">&lt;/<span class="name">offline</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- 指定插件groupId列表，用于搜索时插件的groupId没有明确规定。 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">pluginGroups</span>&gt;</span></div><div class="line">	 	<span class="comment">&lt;!-- 指定使用插件查找进一步的组标识符 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">pluginGroup</span>&gt;</span>com.micmiu.plugins<span class="tag">&lt;/<span class="name">pluginGroup</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">pluginGroups</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!-- 指定这台机器连接到网络的代理服务器的列表。除非另有规定（系统属性或命令行开关），</span></div><div class="line">       列表中配置的第一代理将被激活使用。--&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">proxies</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 配置代理服务器的相关参数 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">proxy</span>&gt;</span></div><div class="line">    	<span class="comment">&lt;!-- 代理标识ID，默认值：default --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>micmiuProxy<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定是否激活，默认值：true --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">active</span>&gt;</span>true<span class="tag">&lt;/<span class="name">active</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定代理协议，默认值：http --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">protocol</span>&gt;</span>http<span class="tag">&lt;/<span class="name">protocol</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定代理认证的用户名 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">username</span>&gt;</span>micmiu<span class="tag">&lt;/<span class="name">username</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定代理认证用户的密码 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">password</span>&gt;</span>mypwd<span class="tag">&lt;/<span class="name">password</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定代理服务器的主机名 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">host</span>&gt;</span>micmiu.com<span class="tag">&lt;/<span class="name">host</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定代理服务的端口 默认值：8080 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">port</span>&gt;</span>80<span class="tag">&lt;/<span class="name">port</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定不被代理的主机名列表。多个用|分隔。--&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">nonProxyHosts</span>&gt;</span>ctosun.com|ctosun.micmiu.com<span class="tag">&lt;/<span class="name">nonProxyHosts</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">proxy</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">proxies</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!-- 这是一个认证配置的列表,系统内部根据配置的serverID使用。认证配置用于maven链接到远程服务--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servers</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 指定的身份认证信息用于连接到一个特定的服务器时，确定系统内的唯一的名称（简称下面的'id'属性）。--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">server</span>&gt;</span></div><div class="line">    	<span class="comment">&lt;!-- 这是server的id（注意不是用户登陆的id）。该id与distributionManagement中repository元素的id必须要匹配。--&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>micmiu-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 服务器认证的用户名 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">username</span>&gt;</span>michael<span class="tag">&lt;/<span class="name">username</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 服务器认证的用户对应的密码 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">password</span>&gt;</span>mypwd<span class="tag">&lt;/<span class="name">password</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 另一个示例 私钥/密码 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">server</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>micmiu-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 认证时使用的私钥文件。 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">privateKey</span>&gt;</span>/home/micmiu/.ssh/id_dsa<span class="tag">&lt;/<span class="name">privateKey</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 认证时使用的私钥密码，没有密码就设为空 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">passphrase</span>&gt;</span>mypwd<span class="tag">&lt;/<span class="name">passphrase</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 目录被创建时的权限设置。其值对应了unix文件系统的权限，如664，或者775 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">directoryPermissions</span>&gt;</span>775<span class="tag">&lt;/<span class="name">directoryPermissions</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 仓库文件创建时的权限设置。其值对应了unix文件系统的权限，如664，或者775。 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">filePermissions</span>&gt;</span>664<span class="tag">&lt;/<span class="name">filePermissions</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">servers</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!-- 指定镜像列表，用于从远程仓库下载资源 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 指定仓库的镜像站点，代替一个给定的库。该镜像藏库有一个ID相匹配的mirrorOf元素。</span></div><div class="line">         ID是用于继承和直接查找目的，必须是唯一的。--&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">    	<span class="comment">&lt;!--该镜像的唯一标识符。id用来区分不同的mirror元素。 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>mirrorId<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!--被镜像的服务器的id，比如：central，不能和id匹配。--&gt;</span></div><div class="line">   		<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>micmiu for dev.<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://dev.micmiu.com/repo/maven2<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!-- 这是一个可以在各种不同的方式激活的配置文件列表，并可以修改构建过程。在settings.xml中提供的信息，</span></div><div class="line">       旨在提供本地机器允许建立在本地环境中工作的具体路径和库位置。有多种方式可以激活配置属性：一种在settings.xml中&lt;activeProfiles&gt;指定；</div><div class="line">       另一种实质上依赖于系统属性，无论是匹配特定的属性值或只是测试到它的存在.配置文件也可以根据JDK版本的前缀进行激活，1.4 可以激活1.4.2_07</div><div class="line">    注：对于在settings.xml中定义的配置，你仅限于指定资源仓库、插件仓库和用于插件在POM中变量的自由形式属性的定义 --&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 指定生成过程的介绍，使用一个或多个上述机制被激活。对于继承而言，激活通过&lt;activatedProfiles/&gt;或命令行配置文件，</span></div><div class="line">         配置文件必须有一个唯一的ID。此配置文件的例子使用的JDK版本触发激活。--&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">    	<span class="comment">&lt;!--该配置的唯一标识符。 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.4<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!--自动触发配置文件的逻辑定义。Activation的逻辑配置决定了是否开启该profile。activation元素并不是激活profile的唯一方式。</span></div><div class="line">			    settings.xml文件中的activeProfile元素可指定需要激活的profile的id。</div><div class="line">			    profile也可以通过在命令行，使用-P标记和逗号分隔的列表来显式的激活 --&gt;</div><div class="line">      <span class="tag">&lt;<span class="name">activation</span>&gt;</span></div><div class="line">      	<span class="comment">&lt;!--指定是否激活的标识 默认值为false--&gt;</span></div><div class="line">    		<span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>false<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></div><div class="line"></div><div class="line">      	<span class="comment">&lt;!--当匹配的jdk被检测到，profile被激活。例如，1.4激活JDK1.4，1.4.0_2，而!1.4激活所有不是以1.4开头的JDK版本。--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 当检测到匹配的操作系统属性时，指定该配置文件将被激活， --&gt;</span></div><div class="line">       	<span class="tag">&lt;<span class="name">os</span>&gt;</span></div><div class="line">		     	<span class="comment">&lt;!--激活profile的操作系统的名字 --&gt;</span></div><div class="line">		     	<span class="tag">&lt;<span class="name">name</span>&gt;</span>windows 7<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		     	<span class="comment">&lt;!--激活profile的操作系统所属家族(如 'windows')  --&gt;</span></div><div class="line">		     	<span class="tag">&lt;<span class="name">family</span>&gt;</span>windows<span class="tag">&lt;/<span class="name">family</span>&gt;</span></div><div class="line">		    	<span class="comment">&lt;!--激活profile的操作系统体系结构  --&gt;</span></div><div class="line">		     	<span class="tag">&lt;<span class="name">arch</span>&gt;</span>x86<span class="tag">&lt;/<span class="name">arch</span>&gt;</span></div><div class="line">		     	<span class="comment">&lt;!--激活profile的操作系统版本--&gt;</span></div><div class="line">		     	<span class="tag">&lt;<span class="name">version</span>&gt;</span>6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	    	<span class="tag">&lt;/<span class="name">os</span>&gt;</span></div><div class="line"></div><div class="line">	    	<span class="comment">&lt;!-- 检测系统对应的属性和值(该值可在POM中通过$</span><span class="template-variable">&#123;属性名称&#125;</span><span class="xml"><span class="comment">引用)，配置就会被激活。</span></span></div><div class="line">	    	    如果值字段是空的，那么存在属性名称字段就会激活 --&gt;</div><div class="line">		    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		     	<span class="comment">&lt;!-- 属性的名称 --&gt;</span></div><div class="line">		     	<span class="tag">&lt;<span class="name">name</span>&gt;</span>mavenVersion<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		     	<span class="comment">&lt;!-- 属性的值 --&gt;</span></div><div class="line">		    	<span class="tag">&lt;<span class="name">value</span>&gt;</span>3.0.4<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">		    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		    <span class="comment">&lt;!-- 通过检测该文件的是否存在来激活配置。missing检查文件是否存在，如果不存在则激活profile；exists则会检查文件是否存在，如果存在则激活。--&gt;</span></div><div class="line">		    <span class="tag">&lt;<span class="name">file</span>&gt;</span></div><div class="line">		    	<span class="comment">&lt;!--如果指定的文件存在，则激活profile。 --&gt;</span></div><div class="line">		    	<span class="tag">&lt;<span class="name">exists</span>&gt;</span>/usr/local/micmiu/workspace/myfile<span class="tag">&lt;/<span class="name">exists</span>&gt;</span></div><div class="line">		    	<span class="comment">&lt;!--如果指定的文件不存在，则激活profile。--&gt;</span></div><div class="line">		    	<span class="tag">&lt;<span class="name">missing</span>&gt;</span>/usr/local/micmiu/workspace/myfile<span class="tag">&lt;/<span class="name">missing</span>&gt;</span></div><div class="line">		    <span class="tag">&lt;/<span class="name">file</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 对应profile的扩展属性列表。Maven属性和Ant中的属性一样，可以用来存放一些值。这些值可以在POM中的任何地方使用标记$</span><span class="template-variable">&#123;X&#125;</span><span class="xml"><span class="comment">来使用，</span></span></div><div class="line">			     这里X是指属性的名称。属性有五种不同的形式，并且都能在settings.xml文件中访问。</div><div class="line">   					1. env.X: 表示系统环境变量。例如,"env.PATH" 等同于 $path环境变量（在Windows上是%PATH%）。</div><div class="line">					  2. project.x：表示 POM中对应的属性值。</div><div class="line">					  3. settings.x: 表示 settings.xml中对应属性值。</div><div class="line">					  4. Java系统属性: 所有可通过java.lang.System.getProperties()访问的属性都能在POM中使用该形式访问。</div><div class="line">					  5. x: 在&lt;properties/&gt;元素中，或者外部文件中设置，以$<span class="template-variable">&#123;someVar&#125;</span><span class="xml"><span class="comment">的形式使用。 --&gt;</span></span></div><div class="line">		 	<span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">		  	<span class="tag">&lt;<span class="name">user.blog</span>&gt;</span>www.micmiu.com<span class="tag">&lt;/<span class="name">user.blog</span>&gt;</span></div><div class="line">		  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 这是另一个配置文件，根据系统属性来激活 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">    	<span class="comment">&lt;!--该配置的唯一标识符。 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>env-dev<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">activation</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">        	<span class="comment">&lt;!-- 被用来激活配置文件的属性的名称 --&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">name</span>&gt;</span>target-env<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">          <span class="comment">&lt;!-- 被用来激活配置文件的属性的值 --&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">value</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 指定配置文件的扩展配置 内容采取property.value的形式 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tomcatPath</span>&gt;</span>/path/to/tomcat/instance<span class="tag">&lt;/<span class="name">tomcatPath</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>repo-dev<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 配置远程仓库列表 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 远程仓库的配置信息 --&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 远程仓库唯一标识--&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 远程仓库名称 --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">name</span>&gt;</span>nexus for develop<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 远程仓库URL --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://192.168.1.8:8080/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">layout</span>&gt;</span>default<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">releases</span>&gt;</span></div><div class="line">						<span class="comment">&lt;!--是否使用这个资源库下载这种类型的构件 默认值：true--&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">						<span class="comment">&lt;!--指定下载更新的频率。这里的选项是：always（一直），daily（每日，默认值），interval：X（这里X是指分钟），或者never（从不）。 --&gt;</span></div><div class="line">			      <span class="tag">&lt;<span class="name">updatePolicy</span>&gt;</span>daily<span class="tag">&lt;/<span class="name">updatePolicy</span>&gt;</span></div><div class="line">			      <span class="comment">&lt;!--当Maven验证构件校验文件失败时该怎么做fail（失败）或者warn（告警）。--&gt;</span></div><div class="line">			      <span class="tag">&lt;<span class="name">checksumPolicy</span>&gt;</span>warn<span class="tag">&lt;/<span class="name">checksumPolicy</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></div><div class="line">						<span class="comment">&lt;!--是否使用这个资源库下载这种类型的构件 默认值：true--&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">						<span class="comment">&lt;!--指定下载更新的频率。这里的选项是：always（一直），daily（每日，默认值），interval：X（这里X是指分钟），或者never（从不）。 --&gt;</span></div><div class="line">			      <span class="tag">&lt;<span class="name">updatePolicy</span>&gt;</span>daily<span class="tag">&lt;/<span class="name">updatePolicy</span>&gt;</span></div><div class="line">			      <span class="comment">&lt;!--当Maven验证构件校验文件失败时该怎么做fail（失败）或者warn（告警）。--&gt;</span></div><div class="line">			      <span class="tag">&lt;<span class="name">checksumPolicy</span>&gt;</span>warn<span class="tag">&lt;/<span class="name">checksumPolicy</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">name</span>&gt;</span>local nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://192.168.1.8:8080/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">layout</span>&gt;</span>default<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">releases</span>&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="comment">&lt;!-- 指定被激活的配置文件--&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">activeProfiles</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">activeProfile</span>&gt;</span>repo-dev<span class="tag">&lt;/<span class="name">activeProfile</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">activeProfiles</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>下面是我个人使用的Setting.xml文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0"</span> </span></div><div class="line">          <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </div><div class="line">          <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span>&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">pluginGroups</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- pluginGroup</span></div><div class="line">     | Specifies a further group identifier to use for plugin lookup.</div><div class="line">    &lt;pluginGroup&gt;com.your.plugins&lt;/pluginGroup&gt;</div><div class="line">    --&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">pluginGroups</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">proxies</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- proxy</span></div><div class="line">     | Specification for one proxy, to be used in connecting to the network.</div><div class="line">     |</div><div class="line">    &lt;proxy&gt;</div><div class="line">      &lt;id&gt;optional&lt;/id&gt;</div><div class="line">      &lt;active&gt;true&lt;/active&gt;</div><div class="line">      &lt;protocol&gt;http&lt;/protocol&gt;</div><div class="line">      &lt;username&gt;proxyuser&lt;/username&gt;</div><div class="line">      &lt;password&gt;proxypass&lt;/password&gt;</div><div class="line">      &lt;host&gt;proxy.host.net&lt;/host&gt;</div><div class="line">      &lt;port&gt;80&lt;/port&gt;</div><div class="line">      &lt;nonProxyHosts&gt;local.net|some.host.com&lt;/nonProxyHosts&gt;</div><div class="line">    &lt;/proxy&gt;</div><div class="line">    --&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">proxies</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">servers</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- server</span></div><div class="line">     | Specifies the authentication information to use when connecting to a particular server, identified by</div><div class="line">     | a unique name within the system (referred to by the 'id' attribute below).</div><div class="line">     | </div><div class="line">     | <span class="doctag">NOTE:</span> You should either specify username/password OR privateKey/passphrase, since these pairings are </div><div class="line">     |       used together.</div><div class="line">     |</div><div class="line">    &lt;server&gt;</div><div class="line">      &lt;id&gt;deploymentRepo&lt;/id&gt;</div><div class="line">      &lt;username&gt;repouser&lt;/username&gt;</div><div class="line">      &lt;password&gt;repopwd&lt;/password&gt;</div><div class="line">    &lt;/server&gt;</div><div class="line">    --&gt;</div><div class="line">    </div><div class="line">    <span class="comment">&lt;!-- Another sample, using keys to authenticate.</span></div><div class="line">    &lt;server&gt;</div><div class="line">      &lt;id&gt;siteServer&lt;/id&gt;</div><div class="line">      &lt;privateKey&gt;/path/to/private/key&lt;/privateKey&gt;</div><div class="line">      &lt;passphrase&gt;optional; leave empty if not used.&lt;/passphrase&gt;</div><div class="line">    &lt;/server&gt;</div><div class="line">    --&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">server</span>&gt;</span></div><div class="line">		  <span class="tag">&lt;<span class="name">id</span>&gt;</span>releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		  <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></div><div class="line">		  <span class="tag">&lt;<span class="name">password</span>&gt;</span>admin123<span class="tag">&lt;/<span class="name">password</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">server</span>&gt;</span></div><div class="line">		  <span class="tag">&lt;<span class="name">id</span>&gt;</span>snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">		  <span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></div><div class="line">		  <span class="tag">&lt;<span class="name">password</span>&gt;</span>admin123<span class="tag">&lt;/<span class="name">password</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">server</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">servers</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- mirror</span></div><div class="line">     | Specifies a repository mirror site to use instead of a given repository. The repository that</div><div class="line">     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used</div><div class="line">     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.</div><div class="line">     |</div><div class="line">    &lt;mirror&gt;</div><div class="line">      &lt;id&gt;mirrorId&lt;/id&gt;</div><div class="line">      &lt;mirrorOf&gt;repositoryId&lt;/mirrorOf&gt;</div><div class="line">      &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;</div><div class="line">      &lt;url&gt;http://my.repository.com/repo/path&lt;/url&gt;</div><div class="line">    &lt;/mirror&gt;</div><div class="line">     --&gt;</div><div class="line">	 <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!--This sends everything else to /public --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://192.168.24.15:8081/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>internet<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo1.maven.org/maven2/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">profile</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!--Enable snapshots for the built in central repo to direct --&gt;</span></div><div class="line">      <span class="comment">&lt;!--all requests to nexus via the mirror --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">repositories</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">repository</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>local private nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://192.168.24.15:8081/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></div><div class="line">        </div><div class="line">      <span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">pluginRepository</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>local private nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://192.168.24.15:8081/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">releases</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">releases</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span><span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span><span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">pluginRepository</span>&gt;</span></div><div class="line">        </div><div class="line">       <span class="tag">&lt;/<span class="name">pluginRepositories</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">activeProfiles</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--make the profile active all the time --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">activeProfile</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">activeProfile</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">activeProfiles</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li>导出所有依赖包<br>在开发中有这样一个需求，需要在非Maven环境下进行开发。这个时候需要将依赖的jar包导出。可以使用如下的命令完成：<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn dependency:<span class="keyword">copy</span>-<span class="keyword">dependencies</span> -DoutputDirectory=lib -DincludeScope=<span class="keyword">compile</span> -sD:\eclipseallinone\maven\settings.xml</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个命令指定了导出Jar包到那个目录，包括那个Scope以及指定的配置文件位置。</p>
+<ol>
+<li>依赖本地Jar<br>在开发过程中，有些包可能在服务器中找不到，需要对私服进行管理。有些只需要在本地加载即可<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt; <span class="attr">ersion</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--本地jar的路径,相对或者绝对都可以--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>path/to/yourLocalJar.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/01/26/Maven中的疑难杂症/">Maven中的疑难杂症</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">林晓明</a></p>
+        <p><span>发布时间:</span>2016-01-26, 18:53:56</p>
+        <p><span>最后更新:</span>2016-05-27, 07:35:00</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/01/26/Maven中的疑难杂症/" title="Maven中的疑难杂症">http://www.linxiaoming.me/2016/01/26/Maven中的疑难杂症/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.linxiaoming.me/2016/01/26/Maven中的疑难杂症/　　作者: 林晓明" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/01/27/JS编码和Java编码区别/">
+                    JS编码和Java编码区别
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/01/19/04-Istanbul代码覆盖率/">
+                    04-Istanbul代码覆盖率
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Maven中的疑难杂症　| 虎头的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/01/27/JS编码和Java编码区别/" title="上一篇: JS编码和Java编码区别">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/01/19/04-Istanbul代码覆盖率/" title="下一篇: 04-Istanbul代码覆盖率">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/JS编码和Java编码区别/">JS编码和Java编码区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/26/Maven中的疑难杂症/">Maven中的疑难杂症</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/04-Istanbul代码覆盖率/">04-Istanbul代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/03-如何使用Karma/">03-如何使用Karma</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/02-如何使用mocha/">02-如何使用mocha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/01-Eslint静态代码检查/">01-Eslint静态代码检查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/00-Javascript测试综述/">00-Javascript测试综述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/npm-简明使用教程/">npm 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/控制码整理/">控制码整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/Glup-简明使用教程/">Glup 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-自定义指令/">Vue.JS入门篇--自定义指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-计算属性/">Vue.JS入门篇--计算属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-处理表单/">Vue.JS入门篇--处理表单</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-事件监听/">Vue.JS入门篇--事件监听</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-列表渲染/">Vue.JS入门篇--列表渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-过滤器/">Vue.JS入门篇--过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-指令/">Vue.JS入门篇--指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-初体验/">Vue.JS入门篇--初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/WebPack简明学习教程/">WebPack 简明学习教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/开始/">开始</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 林晓明
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

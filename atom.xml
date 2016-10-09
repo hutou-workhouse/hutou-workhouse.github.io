@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>虎头的博客</title>
+  <subtitle>这是我的个人空间，书写一些原创的技术文章</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.linxiaoming.me/"/>
+  <updated>2016-05-26T23:35:00.000Z</updated>
+  <id>http://www.linxiaoming.me/</id>
+  
+  <author>
+    <name>林晓明</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开始</title>
+    <link href="http://www.linxiaoming.me/2015/12/27/%E5%BC%80%E5%A7%8B/"/>
+    <id>http://www.linxiaoming.me/2015/12/27/开始/</id>
+    <published>2015-12-27T12:33:35.000Z</published>
+    <updated>2016-05-26T23:35:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是一个全新的开始</p>
+<a id="more"></a>
+<p>这里将是我的新家，先把家里打扮好，然后开始搬家。</p>
+<h2 id="Hexo进行文章书写的最基本方法："><a href="#Hexo进行文章书写的最基本方法：" class="headerlink" title="Hexo进行文章书写的最基本方法："></a>Hexo进行文章书写的最基本方法：</h2><ol>
+<li><p><strong>创建文章</strong></p>
+ <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo <span class="keyword">new</span> <span class="string">"test"</span></div></pre></td></tr></table></figure>
+<p> 之后在source/_posts目录下面，多了一个test.md的文件。可以修改这里的内容完成文章的写作。准备是用简书进行Markdown文章的书写。</p>
+</li>
+<li><p><strong>使用草稿</strong></p>
+ <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo <span class="keyword">new</span> draft <span class="string">"draftTest"</span></div></pre></td></tr></table></figure>
+<p> 会在source/_drafts目录下生成一个new-draft.md文件。但是这个文件不被显示在页面上，链接也访问不到。也就是说如果你想把某一篇文章移除显示，又不舍得删除，可以把它移动到_drafts目录之中。</p>
+</li>
+<li><p><strong>管理草稿</strong><br> 修改配置可以显示草稿</p>
+ <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">render_drafts:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p> 改变启动服务的方式</p>
+ <figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server <span class="comment">--drafts</span></div></pre></td></tr></table></figure>
+<p> 下面这条命令可以把草稿变成文章，或者页面：</p>
+ <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo publish <span class="string">[layout]</span> &lt;filename&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>编译和发布</strong><br> 可以通过如下的命令进行编译和发布</p>
+ <figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div></pre></td></tr></table></figure>
+<p> 发布</p>
+ <figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo d</div></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一个全新的开始&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随便写写" scheme="http://www.linxiaoming.me/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"/>
+    
+    
+      <category term="心得" scheme="http://www.linxiaoming.me/tags/%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+</feed>

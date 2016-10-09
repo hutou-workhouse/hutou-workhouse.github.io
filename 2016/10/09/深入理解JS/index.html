@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="林晓明" />
+
+
+
+<meta name="description" content="深入理解JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JS">
+<meta property="og:url" content="http://www.linxiaoming.me/2016/10/09/深入理解JS/index.html">
+<meta property="og:site_name" content="虎头的博客">
+<meta property="og:description" content="深入理解JS">
+<meta property="og:updated_time" content="2016-10-09T11:04:11.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解JS">
+<meta name="twitter:description" content="深入理解JS">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="虎头的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>深入理解JS | 虎头的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">林晓明</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/note/">流水账</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glup/">Glup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unitils/">Unitils</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控制码/">控制码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构建工具/">构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码/">编码</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">林晓明</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">林晓明</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/note/">流水账</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-深入理解JS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/09/深入理解JS/" class="article-date">
+      <time datetime="2016-10-09T01:48:03.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解JS
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术文章/">技术文章</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>深入理解JS</p>
+<a id="more"></a>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>这篇文章将包含如下的几个内容：</p>
+<blockquote>
+<ol>
+<li>对象的理解</li>
+<li>函数的理解</li>
+<li>封装与继承</li>
+<li>常见的问题</li>
+</ol>
+</blockquote>
+<h3 id="一-对象的理解"><a href="#一-对象的理解" class="headerlink" title="一. 对象的理解"></a>一. 对象的理解</h3><ol>
+<li><p>字面量<br>通过字面量可以很容易的定义对象。在大括号中直接定义，属性：值</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var o = &#123;</div><div class="line"> 	x : 1 ,</div><div class="line"> 	y : 2 ,</div><div class="line"> 	method : <span class="keyword"><span class="keyword">function</span></span>() &#123;</div><div class="line"> 		console.info(<span class="string">"this is a method"</span>);</div><div class="line"> 	&#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>对象的检索<br>可以通过属性名直接得到属性值，也可以使用[]来获得</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">console<span class="selector-class">.info</span>(o.x);</div><div class="line">console<span class="selector-class">.info</span>(o[<span class="string">"y"</span>]);</div></pre></td></tr></table></figure>
+</li>
+<li><p>对象的更新<br>可以直接对对象的属性进行设置操作，更新对象属性；可以直接添加属性，并赋值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">o.x = <span class="number">10</span></div><div class="line"><span class="built_in">console</span>.info(o.x);  <span class="comment">// 10</span></div><div class="line">o.z = <span class="number">20</span></div><div class="line"><span class="built_in">console</span>.info(o.z);	<span class="comment">//	20</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>对象的枚举<br>可以通过for..in来进行枚举；方法也会被枚举出来</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="built_in">name</span> <span class="keyword">in</span> o) &#123;</div><div class="line">	<span class="keyword">if</span> (o.hasOwnProperty(<span class="built_in">name</span>)) &#123;</div><div class="line">		console.info(<span class="string">"property = "</span> + <span class="built_in">name</span> + <span class="string">" and value = "</span> + o[<span class="built_in">name</span>]);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这里注意：为什么有一个<strong><em>hasOwnProperty</em></strong>，是为了防止枚举出原型链上的属性。下面举例说明<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Object.prototype.basex = <span class="number">12</span></div><div class="line">var o = &#123;</div><div class="line">	x : <span class="number">100</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// 这里会打印x</span></div><div class="line"><span class="keyword">for</span> (<span class="built_in">name</span> <span class="built_in">in</span> o) &#123;</div><div class="line">	<span class="keyword">if</span> (o.hasOwnProperty(<span class="built_in">name</span>)) &#123;</div><div class="line">		console.info(<span class="built_in">name</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 这里会打印x, basex</span></div><div class="line"><span class="keyword">for</span> (<span class="built_in">name</span> <span class="built_in">in</span> o) &#123;</div><div class="line">	console.info(<span class="built_in">name</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果hasOwnProperty被改写，可以使用如下方法进行调用<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var o = &#123;</div><div class="line">	x : <span class="number">100</span>,</div><div class="line">	<span class="comment">// 被改写</span></div><div class="line">	hasOwnProperty : <span class="number">111</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">name</span> <span class="built_in">in</span> o) &#123;</div><div class="line">	<span class="comment">// 改变调用方法</span></div><div class="line">	<span class="keyword">if</span> (Object.prototype.hasOwnProperty.<span class="built_in">call</span>(o,<span class="built_in">name</span>)) &#123;</div><div class="line">		console.info(<span class="built_in">name</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>删除对象属性</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">delete</span> o.x</div></pre></td></tr></table></figure>
+</li>
+<li><p>原型链<br>对象可以使用原型链上的属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.prototype.x = <span class="number">100</span></div><div class="line"><span class="keyword">var</span> o = &#123;&#125;</div><div class="line"><span class="built_in">console</span>.info(o.x);	<span class="comment">//	100</span></div><div class="line"><span class="keyword">delete</span> o.x</div><div class="line"><span class="comment">//	不能删除原型链的属性</span></div><div class="line"><span class="built_in">console</span>.info(o.x);	<span class="comment">//	100</span></div><div class="line"><span class="comment">//	自己定义属性</span></div><div class="line">o.x = <span class="number">200</span></div><div class="line"><span class="comment">//	显示自己定义的属性，覆盖原型链属性</span></div><div class="line"><span class="built_in">console</span>.info(o.x);	<span class="comment">//	200</span></div><div class="line"><span class="keyword">delete</span> o.x</div><div class="line"><span class="comment">//	删除自己定义的属性，漏出原型链属性</span></div><div class="line"><span class="built_in">console</span>.info(o.x);	<span class="comment">//	100</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="二-函数的理解"><a href="#二-函数的理解" class="headerlink" title="二. 函数的理解"></a>二. 函数的理解</h3><blockquote>
+<p>函数是JS的一等公民，是JS中最灵活的部分，也是最难理解的部分</p>
+</blockquote>
+<ol>
+<li><p>函数对象<br>函数也是对象，也可以存在属性和方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;	</div><div class="line">&#125;</div><div class="line"><span class="comment">//	使用对象一样使用函数</span></div><div class="line">F.x = <span class="number">12</span>;</div><div class="line"><span class="built_in">console</span>.info(F.x); <span class="comment">// 12</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>函数字面量<br>函数的字面量包含四个部分：保留字function；函数名(可以省略)；函数参数，以逗号分隔；花括号(函数主体)。<br>函数的字面量可以出现在任何允许出现表达式的地方</p>
+</li>
+<li>函数的调用<br>在进行函数调用的时候，会隐含的传入this和arguments。其中arguments是一个伪数组，表示传入的参数。this可以理解为调用的上下文。函数有几种调用方式，下面将分别说明<br><strong>作为方法调用</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">	x : <span class="number">100</span>,</div><div class="line">	method : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="comment">//	方法中的调用，this表示方法的对象，这里是o</span></div><div class="line">		<span class="built_in">console</span>.info(<span class="keyword">this</span>.x);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">o.method()	<span class="comment">//	100</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>函数调用</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">	<span class="comment">// this指代全局变量</span></div><div class="line">	<span class="keyword">this</span>.x = x</div><div class="line">	<span class="built_in">console</span>.info(x);</div><div class="line">&#125;</div><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">	<span class="built_in">console</span>.info(x);	<span class="comment">// not defined	</span></div><div class="line">&#125;<span class="keyword">catch</span>(e)&#123;</div><div class="line">	<span class="built_in">console</span>.info(e);	<span class="comment">// not defined error</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// 调用函数</span></div><div class="line">f(<span class="number">100</span>)</div><div class="line"><span class="built_in">console</span>.info(x);	<span class="comment">//	100</span></div></pre></td></tr></table></figure></p>
+<p><strong>构造器调用</strong>，将函数作为一个构造器<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 	构造器</span></div><div class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">	<span class="keyword">this</span>.x = x</div><div class="line">&#125;</div><div class="line"><span class="comment">// 	构造器中定义方法</span></div><div class="line">F.prototype.read = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.x</div><div class="line">&#125;</div><div class="line"><span class="comment">// 	构造一个对象</span></div><div class="line"><span class="keyword">var</span> ins = <span class="keyword">new</span> F(<span class="number">200</span>)</div><div class="line"><span class="comment">//	调用方法(this指代对象本身)</span></div><div class="line"><span class="built_in">console</span>.info(ins.read());	<span class="comment">//	200</span></div><div class="line"><span class="built_in">console</span>.info(ins.x);		<span class="comment">//	200</span></div></pre></td></tr></table></figure></p>
+<p><strong>call apply</strong><br>在之前的对象说明中，我们已经展示了使用call调用方法的例子。这种调用方法，会主动改变上下文，也就是说this会由我们设定<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//	定义一个对象</span></div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">	x : <span class="number">100</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//	定义一个函数</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//	使用this</span></div><div class="line">	<span class="built_in">console</span>.info(<span class="keyword">this</span>.x);</div><div class="line">&#125;</div><div class="line"><span class="comment">//	两种调用方法的区别</span></div><div class="line">f()			<span class="comment">//	undefined</span></div><div class="line">f.call(o)	<span class="comment">//	100</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li>高阶函数<br>当一个函数接受另一个函数作为参数的时候，就是高阶函数。我们可以自定义高阶函数，下面是两个使用Array中两个高阶函数的例子<br><strong>Array.map</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//	定义一个数值</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div><div class="line"><span class="comment">//	通过高阶函数运算</span></div><div class="line"><span class="keyword">var</span> arrD = arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> x*x</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.info(arrD); <span class="comment">//	[ 1, 4, 9, 16, 25, 36 ]</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>Array.reduce</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//	定义一个数值</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</div><div class="line"><span class="comment">//	通过高阶函数进行求和运算</span></div><div class="line"><span class="keyword">var</span> d = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> x+y</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.info(d);	<span class="comment">//	21</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li>闭包<br>内层函数可以使用外层函数的特点叫做闭包。下面会讲述使用闭包解决一些常见的错误</li>
+</ol>
+<h3 id="三-封装与继承"><a href="#三-封装与继承" class="headerlink" title="三. 封装与继承"></a>三. 封装与继承</h3><blockquote>
+<p>javascript是面向对象的，但是没有语法层面的继承和封装语法。</p>
+</blockquote>
+<ol>
+<li><p>定义类<br>js中我们可以有类似java的使用方法：定义对象，通过new实例化一个对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//	定义一个类</span></div><div class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="comment">//	定义类中的方法</span></div><div class="line">F.prototype.test = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.info(o);</div><div class="line">&#125;</div><div class="line">F.prototype.display = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">"this is a display function"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//	实例化一个类</span></div><div class="line"><span class="keyword">var</span> ins = <span class="keyword">new</span> F;</div><div class="line">ins.test(<span class="string">'lxm'</span>)</div><div class="line">ins.display()</div></pre></td></tr></table></figure>
+</li>
+<li><p>封装<br>通过字面量定义的对象是无法保护属性的，可以随意的修改和增减。下面介绍一个数据封装的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//	创建构造器</span></div><div class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//	私有属性</span></div><div class="line">	<span class="keyword">var</span> x;</div><div class="line">	<span class="comment">//	this是必须的</span></div><div class="line">	<span class="keyword">this</span>.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> x;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">this</span>.setX = <span class="function"><span class="keyword">function</span>(<span class="params">x1</span>) </span>&#123;</div><div class="line">		x = x1;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//	通过构造器创建对象</span></div><div class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> F</div><div class="line"><span class="comment">//	使用对象</span></div><div class="line">instance.setX(<span class="number">100</span>)</div><div class="line"><span class="built_in">console</span>.info(instance.x);		<span class="comment">//	undefined</span></div><div class="line"><span class="built_in">console</span>.info(instance.getX());	<span class="comment">//	100</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//	创建一个继承函数</span></div><div class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">Object</span>.inhert !== <span class="string">'function'</span>)&#123;</div><div class="line">	<span class="built_in">Object</span>.inhert = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</div><div class="line">		<span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">		F.prototype = o</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> F</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//	父对象</span></div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">	x : <span class="number">1</span>,</div><div class="line">	y : <span class="number">100</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//	创建子对象</span></div><div class="line"><span class="keyword">var</span> child = <span class="built_in">Object</span>.inhert(o)</div><div class="line"><span class="built_in">console</span>.info(child.x);	<span class="comment">//	1</span></div><div class="line"><span class="built_in">console</span>.info(o.x);		<span class="comment">//	1</span></div><div class="line"><span class="comment">//	设置x</span></div><div class="line">child.x = <span class="number">200</span></div><div class="line"><span class="built_in">console</span>.info(child.x);	<span class="comment">//	200</span></div><div class="line"><span class="built_in">console</span>.info(o.x);		<span class="comment">//	1</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="四-常见的问题"><a href="#四-常见的问题" class="headerlink" title="四. 常见的问题"></a>四. 常见的问题</h3><blockquote>
+<p>整理一下在实际工作中经常发生的误用</p>
+</blockquote>
+<ol>
+<li>全局作用域<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">myglobal = <span class="string">"hello"</span>; <span class="comment">// 不推荐写法</span></div><div class="line"><span class="built_in">console</span>.log(myglobal); <span class="comment">// "hello"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.myglobal); <span class="comment">// "hello"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>[<span class="string">"myglobal"</span>]); <span class="comment">// "hello"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.myglobal); <span class="comment">// "hello"</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>使用显示声明的变量不能被delete删除<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sss = <span class="string">'abc'</span>;</div><div class="line">ddd = <span class="string">'abc'</span>;</div><div class="line"><span class="keyword">delete</span> sss; <span class="comment">// false</span></div><div class="line"><span class="keyword">delete</span> ddd; <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>函数内使用var避免产生全局变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">  ret = a + b;</div><div class="line">  <span class="keyword">return</span> ret;</div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="built_in">console</span>.info(abc(<span class="number">1</span>,<span class="number">2</span>));</div><div class="line"><span class="built_in">console</span>.info(<span class="keyword">this</span>.ret);</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义变量产生的全局变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> ret = a + b;</div><div class="line">  <span class="keyword">var</span> x = y = <span class="number">3</span>;</div><div class="line">  <span class="keyword">return</span> ret;</div><div class="line">&#125;  </div><div class="line"></div><div class="line"><span class="built_in">console</span>.info(abc(<span class="number">1</span>,<span class="number">2</span>));</div><div class="line"><span class="built_in">console</span>.info(<span class="keyword">this</span>.ret);        </div><div class="line"><span class="built_in">console</span>.info(y);</div></pre></td></tr></table></figure>
+</li>
+<li><p>变量提升</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">()</span></span>&#123;</div><div class="line">  alert(myname);</div><div class="line">  <span class="keyword">var</span> mynam =<span class="string">'lxm'</span>;</div><div class="line">  alert(myname);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 第一阶段是变量，函数声明，以及正常格式的参数创建，这是一个解析和进入上下文 的阶段。<br> 第二个阶段是代码执行，函数表达式和不合格的标识符（为声明的变量）被创建</p>
+</li>
+<li><p>自动添加分行</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">var</span> s = <span class="number">12</span>;</div><div class="line">  <span class="keyword">return</span></div><div class="line">  s</div><div class="line">&#125;</div><div class="line"></div><div class="line">abc();</div></pre></td></tr></table></figure>
+</li>
+<li><p>for循环中产生全局变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i &lt; <span class="number">12</span>;i++)&#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.info(<span class="string">"gloabl i = "</span> + i);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意缓存数组的长度，尤其是进行dom操作的时候<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(var <span class="built_in">i</span>=<span class="number">0</span>, max=document.getElementsByName().<span class="built_in">length</span>;<span class="built_in">i</span>&lt;max;<span class="built_in">i</span>++)&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>循环中常见的错误<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> funArr = [];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">  funArr[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.info(i);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">funArr[<span class="number">2</span>]();</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>通过闭包来解决<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> funArr = [];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</div><div class="line">    funArr[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.info(i);</div><div class="line">    &#125;</div><div class="line">  &#125;)(i);</div><div class="line">&#125;</div><div class="line">funArr[<span class="number">2</span>]();</div></pre></td></tr></table></figure></p>
+<ol>
+<li>使用for..in进行属性遍历<br>进行枚举，但是不保证顺序;通常需要过滤原型链上的属性<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 对象</span></div><div class="line"><span class="keyword">var</span> <span class="keyword">man</span> = &#123;</div><div class="line">   hands: 2,</div><div class="line">   legs: 2,</div><div class="line">   heads: 1</div><div class="line">&#125;;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> t <span class="keyword">in</span> <span class="keyword">man</span>)&#123;</div><div class="line">  <span class="keyword">if</span>(<span class="keyword">man</span>.hasOwnProperty(t))</div><div class="line">    console.info(t);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>另外的一种调用方式，可以避免对象将hasOwnProperty重新定义<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> <span class="keyword">man</span>) &#123;</div><div class="line">   <span class="keyword">if</span> (Object.prototype.hasOwnProperty.call(<span class="keyword">man</span>, i)) &#123; <span class="comment">// 过滤</span></div><div class="line">      console.<span class="built_in">log</span>(i, <span class="string">":"</span>, <span class="keyword">man</span>[i]);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>关于扩展内置属性的问题<br>由于有了prototype的存在，可以很方便的进行属性的扩充<br>最好不增加内置原型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.prototype.testMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">//console.info('这是我弄的!');</span></div><div class="line">  <span class="keyword">return</span> <span class="string">"这是我弄的"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> sss = &#123;&#125;;</div><div class="line">sss.testMethod();</div></pre></td></tr></table></figure>
+</li>
+<li><p>尽可能避免隐式类型转换<br>使用 === !== 来进行判断</p>
+</li>
+<li>eval尽可能不要用<br>这个处理可以接收任何字符串，当成js代码来执行</li>
+<li>关于类型转换<br>parseInt尽可能少用，使用Number()来替换</li>
+<li>内嵌方法中的this错误<br>通常我们在Java等面向对象的语音中都见过this，指代当前的对象，在编译期间就已经确定下来，是编译期绑定的。而javascript是解释性语言，this是动态的，是运行期绑定的，这就导致了this关键字具有多重含义，不好理解。下面是一个js设计中的问题<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="string">'global'</span></div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">	x : <span class="string">'property'</span>,</div><div class="line">	dis : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">var</span> x = <span class="string">'local'</span></div><div class="line">		<span class="built_in">console</span>.info(<span class="string">"dis x = "</span> + <span class="keyword">this</span>.x);			<span class="comment">//	property</span></div><div class="line">		<span class="comment">//	定义一个内嵌方法</span></div><div class="line">		<span class="keyword">var</span> local = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">			<span class="built_in">console</span>.info(<span class="string">"local x = "</span> + <span class="keyword">this</span>.x);	<span class="comment">//	global</span></div><div class="line">		&#125;</div><div class="line">		<span class="comment">//	执行内嵌方法</span></div><div class="line">		local()</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">o.dis()</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>这个测试结果是在浏览器中执行，如果在Node.js环境下，会有点不同</strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/09/深入理解JS/">深入理解JS</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">林晓明</a></p>
+        <p><span>发布时间:</span>2016-10-09, 09:48:03</p>
+        <p><span>最后更新:</span>2016-10-09, 19:04:11</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/09/深入理解JS/" title="深入理解JS">http://www.linxiaoming.me/2016/10/09/深入理解JS/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.linxiaoming.me/2016/10/09/深入理解JS/　　作者: 林晓明" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/09/前端神器Sublime-Text3使用说明/">
+                    前端神器Sublime Text3使用说明
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/01/27/JS编码和Java编码区别/">
+                    JS编码和Java编码区别
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一-对象的理解"><span class="toc-number">2.</span> <span class="toc-text">一. 对象的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-函数的理解"><span class="toc-number">3.</span> <span class="toc-text">二. 函数的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-封装与继承"><span class="toc-number">4.</span> <span class="toc-text">三. 封装与继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-常见的问题"><span class="toc-number">5.</span> <span class="toc-text">四. 常见的问题</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"深入理解JS　| 虎头的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/09/前端神器Sublime-Text3使用说明/" title="上一篇: 前端神器Sublime Text3使用说明">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/01/27/JS编码和Java编码区别/" title="下一篇: JS编码和Java编码区别">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Hexo简单操作/">Hexo简单操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/git-使用教程/">git-使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/CSS简单备忘/">CSS简单备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第五步-启动覆盖率测试/">JaveEE测试：第五步-启动覆盖率测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第四步-代码覆盖率/">JaveEE测试：第四步-代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第三步-使用hamcrest/">JaveEE测试：第三步-使用hamcrest</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第二步-JUNIT自定义/">JaveEE测试：第二步-JUNIT自定义</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第一步-简单整合/">JaveEE测试：第一步-简单整合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第零步-Junit4介绍/">JaveEE测试：第零步-Junit4介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Unitils-使用实践/">Unitils-使用实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/前端神器Sublime-Text3使用说明/">前端神器Sublime Text3使用说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/深入理解JS/">深入理解JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/JS编码和Java编码区别/">JS编码和Java编码区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/26/Maven中的疑难杂症/">Maven中的疑难杂症</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/04-Istanbul代码覆盖率/">04-Istanbul代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/03-如何使用Karma/">03-如何使用Karma</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/02-如何使用mocha/">02-如何使用mocha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/01-Eslint静态代码检查/">01-Eslint静态代码检查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/00-Javascript测试综述/">00-Javascript测试综述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/npm-简明使用教程/">npm 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/控制码整理/">控制码整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/Glup-简明使用教程/">Glup 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-自定义指令/">Vue.JS入门篇--自定义指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-计算属性/">Vue.JS入门篇--计算属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-处理表单/">Vue.JS入门篇--处理表单</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-事件监听/">Vue.JS入门篇--事件监听</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-列表渲染/">Vue.JS入门篇--列表渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-过滤器/">Vue.JS入门篇--过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-指令/">Vue.JS入门篇--指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-初体验/">Vue.JS入门篇--初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/WebPack简明学习教程/">WebPack 简明学习教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/开始/">开始</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 林晓明
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

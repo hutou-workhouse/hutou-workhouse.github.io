@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="林晓明" />
+
+
+
+<meta name="description" content="JaveEE测试：第三步-使用hamcrest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JaveEE测试：第三步-使用hamcrest">
+<meta property="og:url" content="http://www.linxiaoming.me/2016/10/09/JaveEE测试：第三步-使用hamcrest/index.html">
+<meta property="og:site_name" content="虎头的博客">
+<meta property="og:description" content="JaveEE测试：第三步-使用hamcrest">
+<meta property="og:updated_time" content="2016-10-09T11:05:45.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JaveEE测试：第三步-使用hamcrest">
+<meta name="twitter:description" content="JaveEE测试：第三步-使用hamcrest">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="虎头的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>JaveEE测试：第三步-使用hamcrest | 虎头的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">林晓明</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/note/">流水账</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glup/">Glup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unitils/">Unitils</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控制码/">控制码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构建工具/">构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码/">编码</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">林晓明</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">林晓明</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/note/">流水账</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-JaveEE测试：第三步-使用hamcrest" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/09/JaveEE测试：第三步-使用hamcrest/" class="article-date">
+      <time datetime="2016-10-09T06:48:03.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JaveEE测试：第三步-使用hamcrest
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java/">java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>JaveEE测试：第三步-使用hamcrest</p>
+<a id="more"></a>
+<h3 id="hamcrest说明"><a href="#hamcrest说明" class="headerlink" title="hamcrest说明"></a>hamcrest说明</h3><p><a href="http://hamcrest.org/JavaHamcrest/" target="_blank" rel="external">Java Hamcrest官方网站</a>，目前的版本是1.3<br>JUnit和Hamcrest是不同的框架。但是JUnit使用了Hamcrest。使用Hamcrest可以写出更为简洁的Test代码<br>Hamcrest 是一个测试的框架，它提供了一套通用的匹配符 Matcher，灵活使用这些匹配符定义的规则，程序员可以更加精确的表达自己的测试思想，指定所想设定的测试条件。<br><strong>全新的断言语法assertThat，更符合口语的习惯</strong></p>
+<p>###使用</p>
+<ol>
+<li>首先需要加载Hamcrest，在JUnit加载的时候，已经加载hamcrest-core，但是还有很多包放置在hamcrest-library中，所以需要在Maven配置中增加如下内容<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hamcrest<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hamcrest-library<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>注意：</strong>曾经在运行中发现有下面的问题<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">java.lang.NoSuchMethodError: </span><span class="keyword">org.hamcrest.core.AllOf.allOf(Lorg/hamcrest/Matcher;Lorg/hamcrest/Matcher;)Lorg/hamcrest/Matcher;</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.hamcrest.Matchers.allOf(Matchers.java:33)</span></div><div class="line">	<span class="built_in">at</span> com.yun.test.sample.aasert.AssertThatTest.testAdd(AssertThatTest.<span class="keyword">java:43)</span></div><div class="line">	<span class="built_in">at</span> sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</div><div class="line">	<span class="built_in">at</span> sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.<span class="keyword">java:57)</span></div><div class="line">	<span class="built_in">at</span> sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.<span class="keyword">java:43)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">java.lang.reflect.Method.invoke(Method.java:606)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.junit.runners.ParentRunner.run(ParentRunner.java:236)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)</span></div><div class="line">	<span class="built_in">at</span> <span class="keyword">org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)</span></div></pre></td></tr></table></figure></p>
+<p><strong>解决方案：吧上面的Maven配置项放置在JUnit配置之前即可！</strong></p>
+<ol>
+<li>参考下面的例子，注意包的引用<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.*;</div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</div><div class="line"><span class="keyword">import</span> java.util.<span class="built_in">List</span>;</div><div class="line"><span class="keyword">import</span> java.util.<span class="built_in">Map</span>;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">CTest</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	public <span class="keyword">void</span> testAdd() &#123;</div><div class="line"></div><div class="line">		<span class="comment">// 一般匹配符</span></div><div class="line">		<span class="built_in">int</span> s = <span class="keyword">new</span> C().add(<span class="number">1</span>, <span class="number">1</span>);</div><div class="line">		<span class="comment">// allOf：所有条件必须都成立，测试才通过</span></div><div class="line">		assertThat(s, allOf(greaterThan(<span class="number">1</span>), lessThan(<span class="number">3</span>)));</div><div class="line">		<span class="comment">// anyOf：只要有一个条件成立，测试就通过</span></div><div class="line">		assertThat(s, anyOf(greaterThan(<span class="number">1</span>), lessThan(<span class="number">1</span>)));</div><div class="line">		<span class="comment">// anything：无论什么条件，测试都通过</span></div><div class="line">		assertThat(s, anything());</div><div class="line">		<span class="comment">// is：变量的值等于指定值时，测试通过</span></div><div class="line">		assertThat(s, <span class="keyword">is</span>(<span class="number">2</span>));</div><div class="line">		<span class="comment">// not：和is相反，变量的值不等于指定值时，测试通过</span></div><div class="line">		assertThat(s, not(<span class="number">1</span>));</div><div class="line"></div><div class="line">		<span class="comment">// 数值匹配符</span></div><div class="line">		<span class="built_in">double</span> d = <span class="keyword">new</span> C().div(<span class="number">10</span>, <span class="number">3</span>);</div><div class="line">		<span class="comment">// closeTo：浮点型变量的值在3.0±0.5范围内，测试通过</span></div><div class="line">		assertThat(d, closeTo(<span class="number">3.0</span>, <span class="number">0.5</span>));</div><div class="line">		<span class="comment">// greaterThan：变量的值大于指定值时，测试通过</span></div><div class="line">		assertThat(d, greaterThan(<span class="number">3.0</span>));</div><div class="line">		<span class="comment">// lessThan：变量的值小于指定值时，测试通过</span></div><div class="line">		assertThat(d, lessThan(<span class="number">3.5</span>));</div><div class="line">		<span class="comment">// greaterThanOrEuqalTo：变量的值大于等于指定值时，测试通过</span></div><div class="line">		assertThat(d, greaterThanOrEqualTo(<span class="number">3.3</span>));</div><div class="line">		<span class="comment">// lessThanOrEqualTo：变量的值小于等于指定值时，测试通过</span></div><div class="line">		assertThat(d, lessThanOrEqualTo(<span class="number">3.4</span>));</div><div class="line"></div><div class="line">		<span class="comment">// 字符串匹配符</span></div><div class="line">		<span class="built_in">String</span> n = <span class="keyword">new</span> C().getName(<span class="string">"Magci"</span>);</div><div class="line">		<span class="comment">// containsString：字符串变量中包含指定字符串时，测试通过</span></div><div class="line">		assertThat(n, containsString(<span class="string">"ci"</span>));</div><div class="line">		<span class="comment">// startsWith：字符串变量以指定字符串开头时，测试通过</span></div><div class="line">		assertThat(n, startsWith(<span class="string">"Ma"</span>));</div><div class="line">		<span class="comment">// endsWith：字符串变量以指定字符串结尾时，测试通过</span></div><div class="line">		assertThat(n, endsWith(<span class="string">"i"</span>));</div><div class="line">		<span class="comment">// euqalTo：字符串变量等于指定字符串时，测试通过</span></div><div class="line">		assertThat(n, equalTo(<span class="string">"Magci"</span>));</div><div class="line">		<span class="comment">// equalToIgnoringCase：字符串变量在忽略大小写的情况下等于指定字符串时，测试通过</span></div><div class="line">		assertThat(n, equalToIgnoringCase(<span class="string">"magci"</span>));</div><div class="line">		<span class="comment">// equalToIgnoringWhiteSpace：字符串变量在忽略头尾任意空格的情况下等于指定字符串时，测试通过</span></div><div class="line">		assertThat(n, equalToIgnoringWhiteSpace(<span class="string">" Magci   "</span>));</div><div class="line"></div><div class="line">		<span class="comment">// 集合匹配符</span></div><div class="line">		<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; l = <span class="keyword">new</span> C().getList(<span class="string">"Magci"</span>);</div><div class="line">		<span class="comment">// hasItem：Iterable变量中含有指定元素时，测试通过</span></div><div class="line">		assertThat(l, hasItem(<span class="string">"Magci"</span>));</div><div class="line"></div><div class="line">		<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; m = <span class="keyword">new</span> C().getMap(<span class="string">"mgc"</span>, <span class="string">"Magci"</span>);</div><div class="line">		<span class="comment">// hasEntry：Map变量中含有指定键值对时，测试通过</span></div><div class="line">		assertThat(m, hasEntry(<span class="string">"mgc"</span>, <span class="string">"Magci"</span>));</div><div class="line">		<span class="comment">// hasKey：Map变量中含有指定键时，测试通过</span></div><div class="line">		assertThat(m, hasKey(<span class="string">"mgc"</span>));</div><div class="line">		<span class="comment">// hasValue：Map变量中含有指定值时，测试通过</span></div><div class="line">		assertThat(m, hasValue(<span class="string">"Magci"</span>));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>assertThat是JUnit提供的，它与Hamcrest组件进行配合实现测试工作。</p>
+<h3 id="自定义扩展"><a href="#自定义扩展" class="headerlink" title="自定义扩展"></a>自定义扩展</h3><p>当有需要的时候，可以自定义匹配器。这里演示一个自定义判断数字范围的例子<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.hamcrest.<span class="keyword">Description</span>;</div><div class="line"><span class="keyword">import</span> org.hamcrest.Matcher;</div><div class="line"><span class="keyword">import</span> org.hamcrest.TypeSafeMatcher;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> IsNotRangeNumber <span class="keyword">extends</span> TypeSafeMatcher&lt;<span class="keyword">Double</span>&gt;&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">Double</span> start ;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">Double</span> end;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> IsNotRangeNumber(<span class="keyword">Double</span> start,<span class="keyword">Double</span> end)&#123;</div><div class="line">		<span class="keyword">this</span>.start = start;</div><div class="line">		<span class="keyword">this</span>.end = end;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> describeTo(<span class="keyword">Description</span> <span class="keyword">description</span>) &#123;</div><div class="line">		<span class="keyword">description</span>.appendText(<span class="string">"这个数字不在指定范围内"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	<span class="keyword">protected</span> <span class="keyword">boolean</span> matchesSafely(<span class="keyword">Double</span> item) &#123;</div><div class="line">		<span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</div><div class="line">		</div><div class="line">		<span class="keyword">if</span>(item != <span class="keyword">null</span> &amp;&amp; start &lt;= item &amp;&amp; item &lt;= end)&#123;</div><div class="line">			flag = <span class="keyword">true</span>;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> flag;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Matcher&lt;<span class="keyword">Double</span>&gt; notRangeNumber(<span class="keyword">Double</span> a,<span class="keyword">Double</span> b)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> IsNotRangeNumber(a,b);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用方法<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">assertThat</span>(22<span class="selector-class">.9</span>,<span class="selector-tag">IsNotRangeNumber</span><span class="selector-class">.notRangeNumber</span>(12<span class="selector-class">.0</span>, 20<span class="selector-class">.0</span>));</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/09/JaveEE测试：第三步-使用hamcrest/">JaveEE测试：第三步-使用hamcrest</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">林晓明</a></p>
+        <p><span>发布时间:</span>2016-10-09, 14:48:03</p>
+        <p><span>最后更新:</span>2016-10-09, 19:05:45</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/09/JaveEE测试：第三步-使用hamcrest/" title="JaveEE测试：第三步-使用hamcrest">http://www.linxiaoming.me/2016/10/09/JaveEE测试：第三步-使用hamcrest/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.linxiaoming.me/2016/10/09/JaveEE测试：第三步-使用hamcrest/　　作者: 林晓明" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/09/JaveEE测试：第四步-代码覆盖率/">
+                    JaveEE测试：第四步-代码覆盖率
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/09/JaveEE测试：第二步-JUNIT自定义/">
+                    JaveEE测试：第二步-JUNIT自定义
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#hamcrest说明"><span class="toc-number">1.</span> <span class="toc-text">hamcrest说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义扩展"><span class="toc-number">2.</span> <span class="toc-text">自定义扩展</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"JaveEE测试：第三步-使用hamcrest　| 虎头的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/09/JaveEE测试：第四步-代码覆盖率/" title="上一篇: JaveEE测试：第四步-代码覆盖率">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/09/JaveEE测试：第二步-JUNIT自定义/" title="下一篇: JaveEE测试：第二步-JUNIT自定义">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Hexo简单操作/">Hexo简单操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/git-使用教程/">git-使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/CSS简单备忘/">CSS简单备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第五步-启动覆盖率测试/">JaveEE测试：第五步-启动覆盖率测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第四步-代码覆盖率/">JaveEE测试：第四步-代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第三步-使用hamcrest/">JaveEE测试：第三步-使用hamcrest</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第二步-JUNIT自定义/">JaveEE测试：第二步-JUNIT自定义</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第一步-简单整合/">JaveEE测试：第一步-简单整合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第零步-Junit4介绍/">JaveEE测试：第零步-Junit4介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Unitils-使用实践/">Unitils-使用实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/前端神器Sublime-Text3使用说明/">前端神器Sublime Text3使用说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/深入理解JS/">深入理解JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/JS编码和Java编码区别/">JS编码和Java编码区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/26/Maven中的疑难杂症/">Maven中的疑难杂症</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/04-Istanbul代码覆盖率/">04-Istanbul代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/03-如何使用Karma/">03-如何使用Karma</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/02-如何使用mocha/">02-如何使用mocha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/01-Eslint静态代码检查/">01-Eslint静态代码检查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/00-Javascript测试综述/">00-Javascript测试综述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/npm-简明使用教程/">npm 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/控制码整理/">控制码整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/Glup-简明使用教程/">Glup 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-自定义指令/">Vue.JS入门篇--自定义指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-计算属性/">Vue.JS入门篇--计算属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-处理表单/">Vue.JS入门篇--处理表单</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-事件监听/">Vue.JS入门篇--事件监听</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-列表渲染/">Vue.JS入门篇--列表渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-过滤器/">Vue.JS入门篇--过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-指令/">Vue.JS入门篇--指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-初体验/">Vue.JS入门篇--初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/WebPack简明学习教程/">WebPack 简明学习教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/开始/">开始</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 林晓明
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
