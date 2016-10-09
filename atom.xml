@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.linxiaoming.me/"/>
-  <updated>2016-10-09T11:00:05.625Z</updated>
+  <updated>2016-10-09T11:58:54.136Z</updated>
   <id>http://www.linxiaoming.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.linxiaoming.me/2016/10/09/Hexo%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C/"/>
     <id>http://www.linxiaoming.me/2016/10/09/Hexo简单操作/</id>
     <published>2016-10-09T10:47:51.000Z</published>
-    <updated>2016-10-09T11:00:05.625Z</updated>
+    <updated>2016-10-09T11:58:54.136Z</updated>
     
     <content type="html"><![CDATA[<p>Hexo简单操作</p>
 <a id="more"></a>
@@ -50,7 +50,7 @@
 <li>设置SSH keys：需要在git bash下输入如下命令<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#查找是否存在SSH keys</span></div><div class="line">ls -al ~/.ssh</div><div class="line"><span class="comment">#如果是windows下，文件的地址应该在c:\用户\.ssh下</span></div><div class="line"><span class="comment">#生成Key命令</span></div><div class="line">ssh-keygen -t rsa -C <span class="string">"注册gitbhub的邮箱"</span>      </div><div class="line"><span class="comment">#输入命令</span></div><div class="line"> ssh-agent <span class="_">-s</span></div><div class="line">ssh-add ~/.ssh/id_rsa</div><div class="line"><span class="comment">#如果这里出现了错误：Could not open a connection to your authentication agent.请执行下面的命令</span></div><div class="line"><span class="built_in">eval</span> `ssh-agent <span class="_">-s</span>`</div><div class="line">ssh-add</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p><strong><em>注意：</em></strong>在github中设置SSH key，粘贴的内容为id_rsa.pub文件中的内容<br>最后使用如下命令完成测试工作<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ssh -T <span class="selector-attr">[git@github.com]</span>(<span class="attribute">mailto</span>:git<span class="variable">@github</span>.com)</div><div class="line">``` </div><div class="line"></div><div class="line"><span class="selector-tag">4</span>. 进行部署：</div><div class="line">修改<span class="selector-tag">_config</span><span class="selector-class">.yml</span>文件： <span class="selector-attr">[可以戳一下这里]</span>(<span class="attribute">https</span>:<span class="comment">//hexo.io/docs/deployment.html)</span></div></pre></td></tr></table></figure></p>
+<p><strong><em>注意：</em></strong>在github中设置SSH key，粘贴的内容为id_rsa.pub文件中的内容<br>最后使用如下命令完成测试工作<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ssh -T git<span class="variable">@github</span>.com</div><div class="line"><span class="built_in">``</span>` </div><div class="line"></div><div class="line"><span class="number">4</span>. 进行部署：</div><div class="line">修改_config.yml文件： [可以戳一下这里](<span class="attribute">https</span>:<span class="comment">//hexo.io/docs/deployment.html)</span></div></pre></td></tr></table></figure></p>
 <p>deploy:<br>  type: git<br>  repository: 这里设置github资源库的ssh地址<br>  branch: master<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">**<span class="strong">*注意：*</span>*<span class="strong">*这里的设置冒号后面必须有空格    </span></div><div class="line">执行如下命令：</div></pre></td></tr></table></figure></p>
 <p>hexo generate<br>hexo deploy<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">5. </span>博客地址</div><div class="line"><span class="code">            http://xxxx.github.io    xxxx为账号名</span></div><div class="line"></div><div class="line"><span class="strong">**三. Hexo的操作命令**</span></div><div class="line"></div><div class="line">简化操作方法：</div></pre></td></tr></table></figure></p>
 <p>hexo n == hexo new            增加新文章<br>hexo g == hexo generate    生成静态文件<br>hexo s == hexo server         启动服务<br>hexo d == hexo deploy        部署<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">安装主题：这里使用一种主题<span class="keyword">next</span></div></pre></td></tr></table></figure></p>
@@ -76,9 +76,9 @@
       <category term="Hexo" scheme="http://www.linxiaoming.me/categories/Hexo/"/>
     
     
-      <category term="博客" scheme="http://www.linxiaoming.me/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="工具" scheme="http://www.linxiaoming.me/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="博客" scheme="http://www.linxiaoming.me/tags/%E5%8D%9A%E5%AE%A2/"/>
     
   </entry>
   
