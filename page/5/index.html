@@ -173,6 +173,8 @@
                         
                             <li><a href="/about/">关于我</a></li>
                         
+                            <li><a href="/guestbook">guestbook</a></li>
+                        
                         </ul>
                     </nav>
                     <nav class="header-nav">
@@ -256,6 +258,8 @@
                 
                     <li><a href="/about/">关于我</a></li>
                 
+                    <li><a href="/guestbook">guestbook</a></li>
+                
                 <div class="clearfix"></div>
                 </ul>
             </nav>
@@ -287,6 +291,15 @@
       <time datetime="2015-12-27T12:33:35.000Z" itemprop="datePublished">2015-12-27</time>
 </a>
 
+ 
+    <a href="/2015/12/27/开始/#comments" title="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count"  data-thread-key="2015/12/27/开始/" ></span>
+        
+        
+    </a>
 
     </div>
   
@@ -391,6 +404,31 @@
     
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
 
+
+    
+        <script>
+            if ($(".left-col").is(":visible")) {
+                var duoshuoQuery = {short_name:"hutou"};
+                (function() {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'http://static.duoshuo.com/embed.js';
+                    s.async = true; s.charset = 'UTF-8';
+                    (d.head || d.body).appendChild(s);
+                })();
+
+                $(document).ready(function(){
+                    var $duoshuoCount = $(".ds-thread-count");
+                    $duoshuoCount.bind("DOMNodeInserted", function(e) {
+                        var num = $(this).text().replace(/[^0-9]/ig,"");
+                        $(this).siblings(".count-comment").text(num);
+                        $(this).remove();
+                    })
+                })
+            }
+        </script>
+    
+
+     
 
 
 
