@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="林晓明" />
+
+
+
+<meta name="description" content="Node.js的简单入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js即学即用">
+<meta property="og:url" content="http://www.linxiaoming.me/2016/06/22/Node.js即学即用/index.html">
+<meta property="og:site_name" content="虎头的博客">
+<meta property="og:description" content="Node.js的简单入门">
+<meta property="og:updated_time" content="2017-01-18T03:48:10.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js即学即用">
+<meta name="twitter:description" content="Node.js的简单入门">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="虎头的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Node.js即学即用 | 虎头的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?47eedeb218d2630f062b3ce03bc289ff";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">林晓明</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/note/">流水账</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/guestbook">guestbook</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glup/">Glup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMX/">JMX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shiro/">Shiro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unitils/">Unitils</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comet4j/">comet4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcached/">memcached</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码质量/">代码质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控制码/">控制码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构建工具/">构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/监控/">监控</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码/">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">林晓明</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">林晓明</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/note/">流水账</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/guestbook">guestbook</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Node.js即学即用" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/22/Node.js即学即用/" class="article-date">
+      <time datetime="2016-06-22T10:23:23.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js即学即用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Node.js的简单入门</p>
+<a id="more"></a>
+<h3 id="TCP编程"><a href="#TCP编程" class="headerlink" title="TCP编程"></a>TCP编程</h3><blockquote>
+<p>最简单的网络程序</p>
+</blockquote>
+<p> 通过telnet工具可以看到效果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> chatServer = net.createServer();</div><div class="line"></div><div class="line">chatServer.on(<span class="string">'connection'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">client</span>)</span>&#123;</div><div class="line">	client.write(<span class="string">'Hi\n'</span>);</div><div class="line">	client.write(<span class="string">'Bye.\n'</span>);</div><div class="line">	client.end();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">chatServer.listen(<span class="number">9000</span>);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>接收客户端数据</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> chatServer = net.createServer();</div><div class="line"></div><div class="line">chatServer.on(<span class="string">'connection'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">client</span>)</span>&#123;</div><div class="line">	client.write(<span class="string">'Hi\n'</span>);</div><div class="line">	client.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.info(data);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">chatServer.listen(<span class="number">9000</span>);</div></pre></td></tr></table></figure>
+<p>当客户端连接到服务器的时候，触发<strong>connection</strong>事件；客户端发送数据到服务器触发<strong>data</strong>事件</p>
+<blockquote>
+<p>客户端之间的通讯</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> chatServer = net.createServer();</div><div class="line"><span class="keyword">var</span> clientList = [];</div><div class="line"></div><div class="line">chatServer.on(<span class="string">'connection'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">client</span>)</span>&#123;</div><div class="line">	client.write(<span class="string">'Hi\n'</span>);</div><div class="line"></div><div class="line">	clientList.push(client);</div><div class="line"></div><div class="line">	client.on</div><div class="line">	client.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;clientList.length;i++)&#123;</div><div class="line">			<span class="comment">//	把数据发送给所有的客户端</span></div><div class="line">			<span class="keyword">if</span>(clientList[i] !== client)&#123;</div><div class="line">				clientList[i].write(data);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line">chatServer.listen(<span class="number">9000</span>);</div></pre></td></tr></table></figure>
+<p>这个程序可以让客户端之间进行数据通讯</p>
+<blockquote>
+<p>改造程序，提高健壮性</p>
+</blockquote>
+<p>当前的系统是有很大问题的，当一个客户端断开连接的时候，其它客户端发送信息的时候会导致服务器失败。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">client</span><span class="selector-class">.on</span>(<span class="string">'end'</span>,function()&#123;</div><div class="line">	clientList<span class="selector-class">.splice</span>(clientList.indexOf(client),<span class="number">1</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>检查是否断开，然后从客户端列表中删除。还可以更准确的检查，通过client对象的writable。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> chatServer = net.createServer();</div><div class="line"><span class="keyword">var</span> clientList = [];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">broadcast</span>(<span class="params">message,client</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> cleanup = [];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;clientList.length;i++)&#123;</div><div class="line">		<span class="comment">//	把数据发送给所有的客户端</span></div><div class="line">		<span class="keyword">if</span>(clientList[i] !== client)&#123;</div><div class="line">			<span class="keyword">if</span>(clientList[i].writable)&#123;</div><div class="line">				clientList[i].write(message);</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				cleanup.push(clientList[i]);</div><div class="line">				clientList[i].destroy();</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;	</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;cleanup.length;i++)&#123;</div><div class="line">		clientList.splice(clientList.indexOf(cleanup[i]),<span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">chatServer.on(<span class="string">'connection'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">client</span>)</span>&#123;</div><div class="line">	client.name = client.remoteAddress + <span class="string">":"</span> + client.remotePort;</div><div class="line"></div><div class="line">	<span class="built_in">console</span>.info(client.name);</div><div class="line"></div><div class="line">	client.write(<span class="string">'Hi\n'</span>);</div><div class="line"></div><div class="line">	clientList.push(client);</div><div class="line"></div><div class="line">	client.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">		broadcast(data,client);</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	client.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		clientList.splice(clientList.indexOf(client),<span class="number">1</span>);</div><div class="line">	&#125;)</div><div class="line"></div><div class="line">	client.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(e);</div><div class="line">	&#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line">chatServer.listen(<span class="number">9000</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="HTTP通讯"><a href="#HTTP通讯" class="headerlink" title="HTTP通讯"></a>HTTP通讯</h3><p>刚才我们看了TCP通讯的简单例子，下面看一下如何进行HTTP通许。通过http模块，我们可以很容易的构建一个httpserver，也和内容构建一个httpclient。关于Web服务的搭建将在另外的文章中专门论述，这里简单介绍一下客户端程序。<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="built_in">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</div><div class="line"></div><div class="line"><span class="built_in">var</span> myUrl = process.argv[<span class="number">2</span>];</div><div class="line"><span class="built_in">var</span> parseUrl = <span class="built_in">url</span>.parse(myUrl, <span class="literal">true</span>);</div><div class="line"></div><div class="line"><span class="comment">//	http://www.linxiaoming.me/2016/01/27/JavaEE%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</span></div><div class="line"><span class="built_in">var</span> options = &#123;&#125;;</div><div class="line">options.host = parseUrl.hostname;</div><div class="line">options.port = parseUrl.port;</div><div class="line">options.path = parseUrl.pathname;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(parseUrl.search)&#123;</div><div class="line">	options.path += <span class="string">"?"</span> + parseUrl.search;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">var</span> req = http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">	util.log(<span class="string">'STATUS:'</span> + res.statusCode);</div><div class="line">	util.log(<span class="string">'HEADERS:'</span> + util.inspect(res.headers));</div><div class="line"></div><div class="line">	res.setEncoding(<span class="string">'utf-8'</span>);</div><div class="line">	res.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</div><div class="line">		util.log(<span class="string">'BODY:'</span> + chunk);</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	res.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">		util.log(<span class="string">'RESPONSE ERROR:'</span> + err);</div><div class="line">	&#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">req.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">    util.log(<span class="string">'REQUEST ERROR: '</span> + err);</div><div class="line">&#125;);</div><div class="line">req.end();</div></pre></td></tr></table></figure></p>
+<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>Node.js的核心功能是事件循环，下面是Node.js几个最基本的特点</p>
+<ol>
+<li>单进程，单线程</li>
+<li>非阻塞IO</li>
+<li>事件驱动</li>
+</ol>
+<p>异步事件驱动模型，这导致了Node.js的调试时一个让人崩溃的问题<br>首先理解一下异步回调</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> opts =&#123;</div><div class="line">	host : <span class="string">'baidu.com1'</span>,</div><div class="line">	port : <span class="number">80</span>,</div><div class="line">	path : <span class="string">'/'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">	http.get(opts,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'get baidu page.'</span>)</div><div class="line">	&#125;)</div><div class="line">&#125;<span class="keyword">catch</span>(e)&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Will be catched if error!'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个例子里面的catch是不会捕获到异常的！正确的做法应该是这样的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">http.get(opts,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'get baidu page.'</span>)</div><div class="line"></div><div class="line">	req.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(e)</div><div class="line">	&#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>由于Node.js是单线程的，意味着只是用一个CPU工作，对于多核CPU存在着无法利用的问题</p>
+</blockquote>
+<p>Node.js提供了一个<strong>cluster</strong>模块，可以把任务分给子进程，就是说吧当前程序复制给另一个进程。每一个子进程有特殊的能力，比如与其他子进程共享socket连接，这样我们可以写一个Node.js程序，由他创建其他的Node.js程序，并把任务分配给他们。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cluster = <span class="built_in">require</span>(<span class="string">'cluster'</span>);</div><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> numCPUs = <span class="built_in">require</span>(<span class="string">'os'</span>).cpus().length;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(cluster.isMaster)&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;numCPUs;i++)&#123;</div><div class="line">		cluster.fork();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	cluster.on(<span class="string">'death'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">worker</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'worker '</span> + worker.pid + <span class="string">' is died'</span>)</div><div class="line">	&#125;)</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	http.Server(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">		res.writeHead(<span class="number">200</span>);</div><div class="line">		res.end(<span class="string">'Hello world \n'</span>);</div><div class="line">	&#125;).listen(<span class="number">8000</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>主线程和子线程之间是基于<strong>child_process</strong>模块的！检查子线程的健康状态就是基本的功能，还可以通过消息的传递，来监控工作进程的状态<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cluster = <span class="built_in">require</span>(<span class="string">'cluster'</span>);</div><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> numCPUs = <span class="built_in">require</span>(<span class="string">'os'</span>).cpus().length;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.info(<span class="string">"cpu numbers is "</span> + numCPUs);</div><div class="line"></div><div class="line"><span class="keyword">var</span> rssWarn = (<span class="number">12</span> * <span class="number">1024</span> * <span class="number">1024</span>);</div><div class="line"><span class="keyword">var</span> heapWarn = (<span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span>(cluster.isMaster)&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;numCPUs;i++)&#123;</div><div class="line">		<span class="keyword">var</span> worker = cluster.fork();</div><div class="line"></div><div class="line">		worker.on(<span class="string">'message'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">m</span>)</span>&#123;</div><div class="line">			<span class="keyword">if</span>(m.memory)&#123;</div><div class="line">				<span class="keyword">if</span>(m.memory.rss &gt; rssWarn)&#123;</div><div class="line">					<span class="built_in">console</span>.log(<span class="string">'Worker '</span> + m.process + <span class="string">' used too muck memory'</span>)</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	cluster.on(<span class="string">'death'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">worker</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'worker '</span> + worker.pid + <span class="string">' is died'</span>)</div><div class="line">	&#125;)</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	http.Server(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</div><div class="line">		res.writeHead(<span class="number">200</span>);</div><div class="line">		res.end(<span class="string">'Hello world \n'</span>);</div><div class="line">	&#125;).listen(<span class="number">8000</span>);</div><div class="line">	setInterval(<span class="function"><span class="keyword">function</span>(<span class="params">report</span>)</span>&#123;</div><div class="line">		process.send(&#123;memory:process.memoryUsage(),process:process.pid&#125;)</div><div class="line">	&#125;,<span class="number">1000</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>工作进程报告自己的内存使用情况，每隔一秒钟报告一次</p>
+<h3 id="事件模块"><a href="#事件模块" class="headerlink" title="事件模块"></a>事件模块</h3><blockquote>
+<p>EventEmitter </p>
+</blockquote>
+<p>这个类提供基础的事件功能。所有的Event都是围绕着EventEmitter。EventEmitter 对象通常不会直接调用。<br>事件监听<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">server.on(<span class="string">'message'</span>,<span class="function"><span class="keyword">function</span><span class="params">(req,res)</span></span>&#123;</div><div class="line">	<span class="comment">// do someting</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>因为对象需要从EventEmitter接口中实现，继承类需要使用new来构造。下面我们自己定义一个对象，看看怎么使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> utils = <span class="built_in">require</span>(<span class="string">'util'</span>);</div><div class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</div><div class="line"></div><div class="line"><span class="keyword">var</span> Server = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'init'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">utils.inherits(Server, EventEmitter);</div><div class="line"></div><div class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> Server();</div><div class="line"></div><div class="line">s.on(<span class="string">'abc'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.info(<span class="string">'is abc emit'</span>);</div><div class="line">&#125;);</div><div class="line">s.emit(<span class="string">'abc'</span>);</div></pre></td></tr></table></figure></p>
+<p>这个事件是针对某个实例的，不存在全局对象。<br>当调用emit的时候，可以传入多个参数，出于效率的考虑，参数个数最好不要大于2个。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/06/22/Node.js即学即用/">Node.js即学即用</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">林晓明</a></p>
+        <p><span>发布时间:</span>2016-06-22, 18:23:23</p>
+        <p><span>最后更新:</span>2017-01-18, 11:48:10</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/22/Node.js即学即用/" title="Node.js即学即用">http://www.linxiaoming.me/2016/06/22/Node.js即学即用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.linxiaoming.me/2016/06/22/Node.js即学即用/　　作者: 林晓明" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/06/30/Jenkins与sonarqube集成/">
+                    Jenkins与sonarqube集成
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/05/12/JMX起步/">
+                    JMX起步
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP编程"><span class="toc-number">1.</span> <span class="toc-text">TCP编程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP通讯"><span class="toc-number">2.</span> <span class="toc-text">HTTP通讯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件循环"><span class="toc-number">3.</span> <span class="toc-text">事件循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件模块"><span class="toc-number">4.</span> <span class="toc-text">事件模块</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Node.js即学即用　| 虎头的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/06/22/Node.js即学即用/" data-title="Node.js即学即用" data-url="http://www.linxiaoming.me/2016/06/22/Node.js即学即用/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hutou"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/06/30/Jenkins与sonarqube集成/" title="上一篇: Jenkins与sonarqube集成">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/05/12/JMX起步/" title="下一篇: JMX起步">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/07/步步为营学习SpringMVC--第四章/">步步为营学习SpringMVC--第四章：阶段小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/06/步步为营学习SpringMVC--第三章/">步步为营学习SpringMVC--第三章：视图解析器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/06/步步为营学习SpringMVC--第二章/">步步为营学习SpringMVC--第二章：从最简单的控制器开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/步步为营学习SpringMVC--第一章/">步步为营学习SpringMVC--第一章：启动Spring容器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/步步为营学习SpringMVC--第零章/">步步为营学习SpringMVC--第零章：说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Memcached监控工具使用/">Memcached监控工具使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/25/Redis起步/">Redis起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/22/Jetty启动应用/">Jetty启动应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/Shiro简单使用/">Shiro简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/Dubbo简单入门/">Dubbo简单入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/Zookeeper简单入门/">Zookeeper简单入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/web前端推送comet4j的使用/">web前端推送comet4j的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/web应用性能监控：javamelody/">web应用性能监控：javamelody</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/OpenJDK编译/">OpenJDK编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Gson简单使用/">Gson简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Hexo简单操作/">Hexo简单操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/git-使用教程/">git-使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/CSS简单备忘/">CSS简单备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第五步-启动覆盖率测试/">JaveEE测试：第五步-启动覆盖率测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第四步-代码覆盖率/">JaveEE测试：第四步-代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第三步-使用hamcrest/">JaveEE测试：第三步-使用hamcrest</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第二步-JUNIT自定义/">JaveEE测试：第二步-JUNIT自定义</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第一步-简单整合/">JaveEE测试：第一步-简单整合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第零步-Junit4介绍/">JaveEE测试：第零步-Junit4介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Unitils-使用实践/">Unitils-使用实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/前端神器Sublime-Text3使用说明/">前端神器Sublime Text3使用说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/深入理解JS/">深入理解JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/Jenkins与sonarqube集成/">Jenkins与sonarqube集成</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/Node.js即学即用/">Node.js即学即用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/JMX起步/">JMX起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/Docker初体验/">Docker初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/30/SonarQube简单入门/">SonarQube简单入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/开源日志系统ELKbeats平台搭建/">开源日志系统ELKbeats平台搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/JS编码和Java编码区别/">JS编码和Java编码区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/26/Maven中的疑难杂症/">Maven中的疑难杂症</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/04-Istanbul代码覆盖率/">04-Istanbul代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/03-如何使用Karma/">03-如何使用Karma</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/02-如何使用mocha/">02-如何使用mocha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/01-Eslint静态代码检查/">01-Eslint静态代码检查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/00-Javascript测试综述/">00-Javascript测试综述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/npm-简明使用教程/">npm 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/控制码整理/">控制码整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/Glup-简明使用教程/">Glup 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-自定义指令/">Vue.JS入门篇--自定义指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-计算属性/">Vue.JS入门篇--计算属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-处理表单/">Vue.JS入门篇--处理表单</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-事件监听/">Vue.JS入门篇--事件监听</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-列表渲染/">Vue.JS入门篇--列表渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-过滤器/">Vue.JS入门篇--过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-指令/">Vue.JS入门篇--指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-初体验/">Vue.JS入门篇--初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/WebPack简明学习教程/">WebPack 简明学习教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/开始/">开始</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 林晓明
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

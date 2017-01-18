@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="林晓明" />
+
+
+
+<meta name="description" content="Docker技术的入门体验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker初体验">
+<meta property="og:url" content="http://www.linxiaoming.me/2016/05/12/Docker初体验/index.html">
+<meta property="og:site_name" content="虎头的博客">
+<meta property="og:description" content="Docker技术的入门体验">
+<meta property="og:image" content="http://7u2op7.com1.z0.glb.clouddn.com/0.png">
+<meta property="og:image" content="http://7u2op7.com1.z0.glb.clouddn.com/2.png">
+<meta property="og:image" content="http://7u2op7.com1.z0.glb.clouddn.com/1.png">
+<meta property="og:updated_time" content="2017-01-18T03:43:53.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker初体验">
+<meta name="twitter:description" content="Docker技术的入门体验">
+<meta name="twitter:image" content="http://7u2op7.com1.z0.glb.clouddn.com/0.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="虎头的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Docker初体验 | 虎头的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?47eedeb218d2630f062b3ce03bc289ff";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">林晓明</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/note/">流水账</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/guestbook">guestbook</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glup/">Glup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMX/">JMX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shiro/">Shiro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/">SpringMVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unitils/">Unitils</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comet4j/">comet4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcached/">memcached</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nosql/">nosql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码质量/">代码质量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术文章/">技术文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/控制码/">控制码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂项/">杂项</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构建工具/">构建工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/监控/">监控</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码/">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译/">编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">林晓明</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">林晓明</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这是我的个人空间，书写一些原创的技术文章</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/note/">流水账</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/guestbook">guestbook</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1125281337@QQ.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hutou-workhouse" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="/zhihu" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/users/67378d2013bb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Docker初体验" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/12/Docker初体验/" class="article-date">
+      <time datetime="2016-05-12T11:23:23.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Docker初体验
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/docker/">docker</a><a class="article-category-link" href="/categories/docker/容器/">容器</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Docker技术的入门体验</p>
+<a id="more"></a>
+<h3 id="概念和理解"><a href="#概念和理解" class="headerlink" title="概念和理解"></a>概念和理解</h3><p>Docker是一个容器引擎。<a href="http://www.docker.com/" target="_blank" rel="external">doker官方网站</a><br>一个容器实际上是运行在宿主机上的一个进程。只不过在启动这个进程之前，进行了一些特别的处理，让这个进程进入一个虚拟的环境。<br>每个docker容器运行在独立的虚拟环境中，最重要的是文件系统的读写系统。依赖于Linux内涵的两个特性：<br>Namespaces命名空间：是一种封装的概念，提供了系统资源的隔离</p>
+<ol>
+<li>PID 进程隔离</li>
+<li>NET 管理网络接口</li>
+<li>IPC 管理跨进程通信的访问</li>
+<li>MNT 管理挂载点</li>
+<li>UTS 隔离内核</li>
+</ol>
+<p>Control groups控制组：用来分配资源，Linux kernel 2.6.24 版本开始拥有</p>
+<ol>
+<li>资源限制：对进程组进行内存使用限制</li>
+<li>优先级设置</li>
+<li>资源计量</li>
+<li>资源控制：可以将进程组挂起和恢复</li>
+</ol>
+<p>Docker容器的能力：</p>
+<ol>
+<li>文件系统隔离</li>
+<li>进程隔离</li>
+<li>网络隔离</li>
+<li>资源隔离和分组</li>
+</ol>
+<p><img src="http://7u2op7.com1.z0.glb.clouddn.com/0.png" alt="aa"></p>
+<p>目标：</p>
+<ol>
+<li>轻量级的建模方式</li>
+<li>职责与逻辑分离</li>
+<li>快速高效开发生命周期</li>
+<li>鼓励使用面向服务的框架</li>
+</ol>
+<p>什么场合可以使用：</p>
+<ol>
+<li>使用Docker容器进行开发，测试，部署服务</li>
+<li>创建隔离的运行环境</li>
+<li>搭建测试环境，特别是集群环境</li>
+<li>构建Paas</li>
+<li>提供Saas</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 确认64位系统</span></div><div class="line">uname -i</div><div class="line"><span class="meta"># 确认Linux内涵版本，内部版本必须&gt;=3.10</span></div><div class="line">uname -r</div><div class="line"><span class="meta"># 安装在CentOS 7 </span></div><div class="line">yum -y install docker</div><div class="line"><span class="meta"># 安装在CentOS 6 </span></div><div class="line">yum -y install docker-io</div></pre></td></tr></table></figure>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 启动</span></div><div class="line">systemctl start docker.service</div><div class="line"><span class="meta"># 停止</span></div><div class="line">systemctl stop docker.service</div><div class="line"><span class="meta"># 运行命令的帮助</span></div><div class="line">sudo docker help run</div></pre></td></tr></table></figure>
+<h2 id="加速器"><a href="#加速器" class="headerlink" title="加速器"></a>加速器</h2><p><a href="https://dashboard.daocloud.io/" target="_blank" rel="external">https://dashboard.daocloud.io/</a><br><a href="https://cloud.docker.com" target="_blank" rel="external">https://cloud.docker.com</a></p>
+<h2 id="Docker核心概念"><a href="#Docker核心概念" class="headerlink" title="Docker核心概念"></a>Docker核心概念</h2><p>Docker是C/S架构（客户端，守护进程）<br><img src="http://7u2op7.com1.z0.glb.clouddn.com/2.png" alt="整体示意图"><br>有下面三个核心概念：</p>
+<ol>
+<li><p>仓库<br>Registry概念：本地Registry，官方Registry<br>保存用户的镜像，Docker Hub是一个官方仓库。减少构建时间<br>从官方仓库拉取镜像，可以使用daocloud提供的加速器服务</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull <span class="keyword">redi</span><span class="variable">s:2</span>.<span class="number">8.19</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>镜像<br>Docker镜像：暂时可以理解为目录，是容器的源代码，每一个容器启动的时候在镜像中进行复制，然后启动容器。<br>最底端是引导文件系统 bootfs<br>引导文件系统 rootfs永远是只读状态，联合加载（加载多个文件系统，进行叠加）<br>基础镜像+联合加载文件系统</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 查看镜像</span></div><div class="line"><span class="meta"># 镜像ID，镜像tag，镜像仓库，仓库+tag可以唯一标识一个镜像</span></div><div class="line">docker images</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="http://7u2op7.com1.z0.glb.clouddn.com/1.png" alt="page"></p>
+<ol>
+<li>容器<br>是启动和执行阶段，通过镜像来启动。镜像中只读层永远是只读的，在写的时候进行复制，生成副本<br>Docker容器：守护式容器，交互式容器<br>参数：<br>   -it  用于创建交互式容器<br>   -d 用于创建守护式容器<br>   -name 给容器指定名称</li>
+<li>试验一个web服务器<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 创建交互式容器</span></div><div class="line">docker run -p <span class="number">80</span> --name web -i -t ubuntu /bin/bash</div><div class="line"><span class="meta"># 安装Nginx</span></div><div class="line">apt-<span class="keyword">get</span> update</div><div class="line">apt-<span class="keyword">get</span> install -y nginx</div><div class="line"><span class="meta"># 安装vim</span></div><div class="line">apt-<span class="keyword">get</span> install -y vim</div><div class="line"><span class="meta"># 创建网站目录</span></div><div class="line">mkdir -p /<span class="keyword">var</span>/www/html</div><div class="line">cd /<span class="keyword">var</span>/www/html</div><div class="line"><span class="meta"># vim创建一个静态页面</span></div><div class="line"><span class="meta"># nginx配置文件</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>镜像：名字，TAG<br>镜像文件是分层的</p>
+<ol>
+<li>可以使用pull命令从仓库获取镜像<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker pull registory<span class="selector-class">.hub</span><span class="selector-class">.docker</span><span class="selector-class">.com</span>/ubuntu:latest</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>从注册服务器：registory.hub.docker.com<br>仓库：ubuntu<br>标记：latest</p>
+<ol>
+<li><p>通过镜像创建容器</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -<span class="selector-tag">i</span> -t ubuntu /bin/bash</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看镜像信息</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">docker</span> images</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>查看信息包括：仓库，TAG，唯一ID，创建时间，镜像大小<br>通过仓库和TAG可以唯一确定一个镜像<br>可以为本地镜像增加TAG<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="keyword">tag</span> <span class="title">docker</span>.io/konstruktoid/ubuntu:latest ubuntu:linxm</div></pre></td></tr></table></figure></p>
+<p>查看镜像详细信息<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">docker</span> <span class="selector-tag">inspect</span> <span class="selector-tag">ununtu</span><span class="selector-pseudo">:linxm</span></div></pre></td></tr></table></figure></p>
+<p>镜像寻找<br><figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">search</span> mysql</div></pre></td></tr></table></figure></p>
+<p>删除镜像<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">docker</span> <span class="selector-tag">rmi</span> <span class="selector-tag">ubuntu</span><span class="selector-pseudo">:linxm</span></div></pre></td></tr></table></figure></p>
+<h3 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h3><p>创建镜像有三种：</p>
+<ol>
+<li>基于已有镜像的容器创建<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ docker run -it ubuntu:linxm /bin/bash</div><div class="line">$ touch <span class="built_in">test</span></div><div class="line">$ <span class="built_in">exit</span></div><div class="line">$ docker ps <span class="_">-a</span></div><div class="line">$ docker commit -m <span class="string">"增加一个文件"</span> <span class="_">-a</span> <span class="string">"作者"</span> 6b1924dabf20 <span class="built_in">test</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>上面的例子是增加了一个文件，更新镜像</p>
+<ol>
+<li><p>基于本地模板导入</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 存出：镜像保存到本地文件</span></div><div class="line"><span class="variable">$ </span>docker save -o ubuntu.tar <span class="symbol">ubuntu:</span>linxm</div><div class="line"><span class="comment"># 载入：将镜像载入</span></div><div class="line"><span class="variable">$ </span>docker load --input ubuntu.tar</div><div class="line"><span class="comment"># 上传镜像</span></div><div class="line"><span class="variable">$ </span>docker push <span class="symbol">NAME:</span>tag</div></pre></td></tr></table></figure>
+</li>
+<li><p>基于Dockerfile创建</p>
+</li>
+</ol>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>查看本机存在的容器<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看容器</span></div><div class="line"><span class="variable">$ </span>docker ps -a</div><div class="line"><span class="comment"># 删除容器，指定一个容器ID</span></div><div class="line"><span class="variable">$ </span>docker rm <span class="number">394</span></div></pre></td></tr></table></figure></p>
+<p>容器是镜像的一个运行实例，它带有额外的可写文件层<br>创建容器，启动容器，终止容器，进入容器执行操作，删除容器，容器迁移<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 创建容器</span></div><div class="line"><span class="variable">$ </span>docker create -it <span class="symbol">ubuntu:</span>lastest</div><div class="line"><span class="variable">$ </span>docker ps -a</div><div class="line"><span class="variable">$ </span>docker run ubuntu /bin/echo <span class="string">'Hello world'</span></div></pre></td></tr></table></figure></p>
+<p>一种是基于镜像新建一个容器并启动，另一个是将终止状态的容器重新启动。<br>获取容器的输出信息<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>docker logs <span class="number">1</span>afe</div></pre></td></tr></table></figure></p>
+<p>终止容器<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">stop</span> <span class="number">1</span>afe</div></pre></td></tr></table></figure></p>
+<p>主要命令如下：<br><figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 会启动新的shell，镜像有自己的默认命令</span></div><div class="line">sudo docker run -it centos:<span class="number">6</span> /bin/bash</div><div class="line"><span class="meta"># 查看docker容器</span></div><div class="line">docker ps</div><div class="line">docker ps -a</div><div class="line"><span class="meta"># docker容器的详细信息</span></div><div class="line">docker inspect</div><div class="line">docker inspect -f </div><div class="line"><span class="meta"># 查看IP地址</span></div><div class="line">docker inspect -f  <span class="string">'&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;'</span> f311b</div></pre></td></tr></table></figure></p>
+<p>交互式容器的操作：<br>在交互式容器基础上，ctrl+p,ctrl+q进入守护式容器<br>进入守护式容器：docker attach 容器名字<br>停止容器：docker stop 容器名<br>运行容器的端口：-p 80 -P 全部</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/05/12/Docker初体验/">Docker初体验</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">林晓明</a></p>
+        <p><span>发布时间:</span>2016-05-12, 19:23:23</p>
+        <p><span>最后更新:</span>2017-01-18, 11:43:53</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/12/Docker初体验/" title="Docker初体验">http://www.linxiaoming.me/2016/05/12/Docker初体验/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.linxiaoming.me/2016/05/12/Docker初体验/　　作者: 林晓明" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/05/12/JMX起步/">
+                    JMX起步
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/03/30/SonarQube简单入门/">
+                    SonarQube简单入门
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念和理解"><span class="toc-number">1.</span> <span class="toc-text">概念和理解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number"></span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动"><span class="toc-number"></span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加速器"><span class="toc-number"></span> <span class="toc-text">加速器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker核心概念"><span class="toc-number"></span> <span class="toc-text">Docker核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#镜像"><span class="toc-number">1.</span> <span class="toc-text">镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建镜像"><span class="toc-number">2.</span> <span class="toc-text">创建镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容器"><span class="toc-number">3.</span> <span class="toc-text">容器</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Docker初体验　| 虎头的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/05/12/Docker初体验/" data-title="Docker初体验" data-url="http://www.linxiaoming.me/2016/05/12/Docker初体验/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hutou"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/05/12/JMX起步/" title="上一篇: JMX起步">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/03/30/SonarQube简单入门/" title="下一篇: SonarQube简单入门">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/07/步步为营学习SpringMVC--第四章/">步步为营学习SpringMVC--第四章：阶段小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/06/步步为营学习SpringMVC--第三章/">步步为营学习SpringMVC--第三章：视图解析器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/06/步步为营学习SpringMVC--第二章/">步步为营学习SpringMVC--第二章：从最简单的控制器开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/步步为营学习SpringMVC--第一章/">步步为营学习SpringMVC--第一章：启动Spring容器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/步步为营学习SpringMVC--第零章/">步步为营学习SpringMVC--第零章：说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Memcached监控工具使用/">Memcached监控工具使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/25/Redis起步/">Redis起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/22/Jetty启动应用/">Jetty启动应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/Shiro简单使用/">Shiro简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/Dubbo简单入门/">Dubbo简单入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/Zookeeper简单入门/">Zookeeper简单入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/web前端推送comet4j的使用/">web前端推送comet4j的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/web应用性能监控：javamelody/">web应用性能监控：javamelody</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/OpenJDK编译/">OpenJDK编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Gson简单使用/">Gson简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Hexo简单操作/">Hexo简单操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/git-使用教程/">git-使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/CSS简单备忘/">CSS简单备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第五步-启动覆盖率测试/">JaveEE测试：第五步-启动覆盖率测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第四步-代码覆盖率/">JaveEE测试：第四步-代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第三步-使用hamcrest/">JaveEE测试：第三步-使用hamcrest</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第二步-JUNIT自定义/">JaveEE测试：第二步-JUNIT自定义</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第一步-简单整合/">JaveEE测试：第一步-简单整合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/JaveEE测试：第零步-Junit4介绍/">JaveEE测试：第零步-Junit4介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/Unitils-使用实践/">Unitils-使用实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/前端神器Sublime-Text3使用说明/">前端神器Sublime Text3使用说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/深入理解JS/">深入理解JS</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/Jenkins与sonarqube集成/">Jenkins与sonarqube集成</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/Node.js即学即用/">Node.js即学即用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/JMX起步/">JMX起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/Docker初体验/">Docker初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/30/SonarQube简单入门/">SonarQube简单入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/开源日志系统ELKbeats平台搭建/">开源日志系统ELKbeats平台搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/27/JS编码和Java编码区别/">JS编码和Java编码区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/26/Maven中的疑难杂症/">Maven中的疑难杂症</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/04-Istanbul代码覆盖率/">04-Istanbul代码覆盖率</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/03-如何使用Karma/">03-如何使用Karma</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/02-如何使用mocha/">02-如何使用mocha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/01-Eslint静态代码检查/">01-Eslint静态代码检查</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/19/00-Javascript测试综述/">00-Javascript测试综述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/npm-简明使用教程/">npm 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/控制码整理/">控制码整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/04/Glup-简明使用教程/">Glup 简明使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-自定义指令/">Vue.JS入门篇--自定义指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-计算属性/">Vue.JS入门篇--计算属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-处理表单/">Vue.JS入门篇--处理表单</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-事件监听/">Vue.JS入门篇--事件监听</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-列表渲染/">Vue.JS入门篇--列表渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-过滤器/">Vue.JS入门篇--过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-指令/">Vue.JS入门篇--指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/28/Vue-JS入门篇-初体验/">Vue.JS入门篇--初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/WebPack简明学习教程/">WebPack 简明学习教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/开始/">开始</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 林晓明
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次, 本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
